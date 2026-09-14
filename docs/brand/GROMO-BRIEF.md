@@ -63,7 +63,7 @@ solo sobre tinta o como elemento gráfico.
 
 | Uso | Peso | Notas |
 |---|---|---|
-| Wordmark "Gromo" | 800 | `letter-spacing: -2%`, solo la G en mayúscula |
+| Wordmark "Gromo" | **700** | `letter-spacing: -2%`, solo la G en mayúscula. Medido contra el lockup de Canva: Bold desvía 5,9 %, ExtraBold 14,1 % |
 | Titulares | 700 | |
 | Subtítulos / UI | 600 | |
 | Cuerpo | 400 | `line-height: 1.5` |

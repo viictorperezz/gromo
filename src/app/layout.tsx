@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { GromoGradients } from "@/components/brand/GromoLogo";
 import "./globals.css";
 
 const inter = Inter({
@@ -21,7 +22,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className={`${inter.variable} h-full antialiased`}>
-      <body className="flex min-h-full flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">
+        <GromoGradients />
+        {children}
+      </body>
     </html>
   );
 }
