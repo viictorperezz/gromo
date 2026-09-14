@@ -135,9 +135,110 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* ---------------------------------------------------------------
+   Movimiento
+   Todo lo de aquí se apaga con prefers-reduced-motion: quien pide
+   menos animación ve la página quieta y completa, no a medias.
+   --------------------------------------------------------------- */
+
+@keyframes gromo-brotar {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes gromo-hoja {
+  from {
+    opacity: 0;
+    transform: scale(0.2) rotate(-18deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes gromo-trazar {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes gromo-nodo {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  60% {
+    transform: scale(1.25);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes gromo-entrar {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gromo-flotar {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes gromo-desfilar {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  /* Foco visible en todo lo que se puede tabular. Sin esto, quien navega con
+     teclado no sabe dónde está. */
+  :focus-visible {
+    outline: 2px solid var(--gromo-verde);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  .dark :focus-visible,
+  [data-tono="tinta"] :focus-visible {
+    outline-color: var(--gromo-lima);
   }
   body {
     @apply bg-background text-foreground;

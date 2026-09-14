@@ -3,7 +3,7 @@ import { PaginaLegal } from "@/components/sections/PaginaLegal";
 import { MARCA } from "@/lib/contenido";
 
 export const metadata: Metadata = {
-  title: "Política de cookies — Gromo",
+  title: "Política de cookies",
   robots: { index: false, follow: false },
 };
 

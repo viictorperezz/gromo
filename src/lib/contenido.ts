@@ -143,14 +143,11 @@ export const AYUDAS = {
   titulo: "La cuenta que importa",
   entrada:
     "Casi todas las comunidades tienen ayudas a la digitalización de pymes. Cambian el nombre, el porcentaje y el plazo, pero el mecanismo es el mismo: tú pagas el proyecto y la administración te devuelve una parte.",
-  tabla: {
-    encabezados: ["Cobertura de la ayuda", "Pagas", "Te devuelven", "Coste neto"],
-    filas: [
-      ["80 %", "5.000 €", "4.000 €", "1.000 €"],
-      ["70 %", "5.000 €", "3.500 €", "1.500 €"],
-      ["50 %", "5.000 €", "2.500 €", "2.500 €"],
-    ],
-  },
+  /** Precio del proyecto tipo, sin IVA. */
+  base: 5000,
+  /** Tramos habituales de cobertura en las convocatorias autonómicas. */
+  coberturas: [50, 60, 70, 80],
+  coberturaPorDefecto: 70,
   notas: [
     "Los importes son sin IVA. El IVA no suele ser subvencionable.",
     "El circuito habitual: el gasto tiene que estar hecho y pagado antes de solicitar. Por eso el calendario importa tanto como el precio.",

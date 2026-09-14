@@ -3,7 +3,7 @@ import { PaginaLegal, Pendiente } from "@/components/sections/PaginaLegal";
 import { LEGAL, MARCA } from "@/lib/contenido";
 
 export const metadata: Metadata = {
-  title: "Política de privacidad — Gromo",
+  title: "Política de privacidad",
   robots: { index: false, follow: false },
 };
 

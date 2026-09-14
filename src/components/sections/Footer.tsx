@@ -23,7 +23,7 @@ export function Footer() {
 
           <div className="flex gap-14">
             <nav aria-label="Secciones">
-              <h2 className="mb-4 text-[12px] font-semibold tracking-wide text-gromo-gris uppercase">
+              <h2 className="mb-4 text-[14px] font-bold text-gromo-tinta">
                 Secciones
               </h2>
               <ul className="grid gap-2.5">
@@ -41,7 +41,7 @@ export function Footer() {
             </nav>
 
             <nav aria-label="Legal">
-              <h2 className="mb-4 text-[12px] font-semibold tracking-wide text-gromo-gris uppercase">
+              <h2 className="mb-4 text-[14px] font-bold text-gromo-tinta">
                 Legal
               </h2>
               <ul className="grid gap-2.5">

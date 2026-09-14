@@ -78,7 +78,7 @@ export async function enviarContacto(
         from: process.env.CONTACTO_REMITENTE ?? `Gromo <web@${MARCA.dominio}>`,
         to: [destino],
         reply_to: email,
-        subject: `Diagnóstico solicitado — ${empresa}`,
+        subject: `Diagnóstico solicitado: ${empresa}`,
         text: cuerpo,
       }),
     });

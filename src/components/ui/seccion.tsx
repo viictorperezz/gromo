@@ -20,7 +20,7 @@ export function Seccion({
     <section
       id={id}
       className={cn(
-        "scroll-mt-20 px-5 py-20 sm:px-8 sm:py-28",
+        "scroll-mt-28 px-5 py-20 sm:px-8 sm:py-28",
         tono === "claro" && "bg-white text-gromo-tinta",
         tono === "hueso" && "bg-gromo-hueso text-gromo-tinta",
         tono === "tinta" && "bg-gromo-tinta text-gromo-hueso",
@@ -32,6 +32,17 @@ export function Seccion({
   );
 }
 
+/**
+ * Antetítulo de sección.
+ *
+ * Caja baja y tracking normal a propósito: la etiqueta en mayúsculas con
+ * letra muy espaciada ("EL PROBLEMA", "LAS AYUDAS") es el atajo tipográfico
+ * más reconocible de una página generada, y no aporta nada que el tamaño y
+ * el color no hagan ya.
+ *
+ * El motivo de identidad es el filete corto que la precede: es el tallo del
+ * brote, tumbado, y se repite en todas las secciones.
+ */
 export function Antetitulo({
   children,
   tono = "claro",
@@ -42,10 +53,11 @@ export function Antetitulo({
   return (
     <p
       className={cn(
-        "mb-4 text-[13px] font-semibold tracking-[0.12em] uppercase",
+        "mb-4 flex items-center gap-3 text-[15px] font-semibold",
         tono === "tinta" ? "text-gromo-lima" : "text-gromo-verde-oscuro",
       )}
     >
+      <span aria-hidden className="h-[3px] w-7 rounded-full bg-current" />
       {children}
     </p>
   );
