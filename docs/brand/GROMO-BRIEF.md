@@ -123,13 +123,22 @@ que puede cometer esta marca en un mercado pequeño.
 
 ## 6. Assets de marca
 
-Los archivos de marca del fundador van en `public/brand/`. Inventario esperado:
+Los archivos de marca viven en `public/brand/`. Inventario:
 
-- [ ] Símbolo (Brote) en SVG — horizontal, vertical, favicon
-- [ ] Wordmark "Gromo" (Inter 800, no generado por IA)
-- [ ] Versión monocroma (blanco y negro)
-- [ ] Open Graph / redes
-- [ ] Imágenes de apoyo (hero, secciones)
+- [x] Símbolo (Brote) en SVG — `gromo-simbolo.svg`, `-degradado.svg`, `-mono.svg`.
+      Geometría medida sobre el PNG original, no calcada a ojo.
+- [x] Wordmark "Gromo" — como **texto vivo** en `GromoLogo.tsx` (Inter 800, tracking −2 %).
+      NO como imagen: así escala, cambia con el tema y lo indexa Google.
+- [x] Versión monocroma — variante `tone="mono"`, hereda `currentColor`.
+- [x] Isotipo en claro y oscuro — `isotipo-claro.png`, `isotipo-oscuro.png`.
+- [x] Lockups verticales en PNG — `lockup-vertical-claro.png`, `-oscuro.png`.
+      **Pendiente de validar** que su tipografía incrustada coincide con Inter 800;
+      ver `/marca`. Si no coincide, unificar antes de publicar nada.
+- [x] Fondos — `fondo-claro.png`, `fondo-oscuro.png`, `hero-oscuro.png`,
+      `banner-panoramico.png` (2,53:1).
+- [ ] Favicon multi-tamaño derivado del SVG.
+- [ ] Imagen Open Graph 1200×630.
+- [ ] Avatar LinkedIn 400×400 y banner 1584×396.
 
 Si un asset falta, se deja placeholder y se anota. **No se rellena con assets de la referencia.**
 

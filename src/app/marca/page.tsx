@@ -84,6 +84,45 @@ export default function MarcaPage() {
         </Bloque>
 
         <Bloque
+          titulo="El wordmark: tu lockup frente al texto vivo"
+          nota="Arriba tu PNG de Canva, con las letras incrustadas. Abajo el mismo lockup renderizado en Inter 800 con tracking −2 %, que es lo que dice el handoff y lo que usará la web. Mira si las letras coinciden. Si no coinciden, hay que elegir una de las dos y unificar: la web y el PNG no pueden llevar tipografías distintas."
+        >
+          <div className="grid gap-6 sm:grid-cols-2">
+            <div className="flex flex-col items-center gap-4 rounded-xl border border-border bg-white p-6">
+              <Image
+                src="/brand/lockup-vertical-claro.png"
+                alt="Lockup vertical de Gromo sobre fondo claro"
+                width={220}
+                height={220}
+              />
+              <span className="text-[11px] text-muted-foreground">
+                PNG — letras incrustadas
+              </span>
+              <hr className="w-full border-border" />
+              <GromoLogo orientation="vertical" className="text-gromo-tinta" />
+              <span className="text-[11px] text-muted-foreground">
+                Vivo — Inter 800
+              </span>
+            </div>
+
+            <div className="flex flex-col items-center gap-4 rounded-xl border border-border bg-gromo-tinta p-6">
+              <Image
+                src="/brand/lockup-vertical-oscuro.png"
+                alt="Lockup vertical de Gromo sobre fondo oscuro"
+                width={220}
+                height={220}
+              />
+              <span className="text-[11px] text-white/60">
+                PNG — letras incrustadas
+              </span>
+              <hr className="w-full border-white/15" />
+              <GromoLogo orientation="vertical" className="text-gromo-hueso" />
+              <span className="text-[11px] text-white/60">Vivo — Inter 800</span>
+            </div>
+          </div>
+        </Bloque>
+
+        <Bloque
           titulo="Legibilidad por tamaño"
           nota="El mínimo del handoff es 16 px. A ese tamaño el símbolo tiene que seguir leyéndose como un brote, no como una mancha."
         >
