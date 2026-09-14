@@ -4,14 +4,18 @@ import { Revelar } from "@/components/ui/revelar";
 import { PORQUE } from "@/lib/contenido";
 
 /**
- * Dos columnas desfasadas: la derecha baja un poco respecto a la izquierda.
- * Ese desnivel evita la cuadrícula perfecta y hace que la vista recorra la
- * sección en zigzag en vez de leerla como una tabla.
+ * Rejilla alineada, de una sola lista.
+ *
+ * Hubo una versión con las dos columnas desfasadas buscando asimetría, pero el
+ * desnivel hacía que ninguna fila casara con la de al lado y se leía como un
+ * fallo de maquetación, no como una decisión. La variación de ritmo de la
+ * página ya la aportan el problema (editorial), los servicios (destacado más
+ * lista) y las ayudas (calculadora); esta sección gana estando ordenada.
+ *
+ * Con un único <ul> en rejilla, las filas se alinean solas aunque los textos
+ * tengan distinta longitud.
  */
 export function PorQue() {
-  const izquierda = PORQUE.items.filter((_, i) => i % 2 === 0);
-  const derecha = PORQUE.items.filter((_, i) => i % 2 === 1);
-
   return (
     <section
       id="por-que"
@@ -23,44 +27,26 @@ export function PorQue() {
           <Titulo>{PORQUE.titulo}</Titulo>
         </Revelar>
 
-        <div className="mt-14 grid gap-x-16 gap-y-12 sm:grid-cols-2">
-          <ul className="grid gap-12">
-            {izquierda.map((i, n) => (
-              <Punto key={i.titulo} {...i} retraso={n * 120} />
-            ))}
-          </ul>
-          <ul className="grid gap-12 sm:mt-20">
-            {derecha.map((i, n) => (
-              <Punto key={i.titulo} {...i} retraso={n * 120 + 60} desde="derecha" />
-            ))}
-          </ul>
-        </div>
+        <ul className="mt-14 grid gap-x-12 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+          {PORQUE.items.map((i, n) => (
+            <Revelar
+              as="li"
+              key={i.titulo}
+              retraso={(n % 3) * 100}
+              className="group"
+            >
+              <GromoSymbol
+                decorative
+                className="size-7 transition-transform duration-500 group-hover:-translate-y-1"
+              />
+              <h3 className="mt-4 text-lg font-bold">{i.titulo}</h3>
+              <p className="mt-2.5 text-[15px] leading-relaxed text-gromo-gris">
+                {i.texto}
+              </p>
+            </Revelar>
+          ))}
+        </ul>
       </div>
     </section>
-  );
-}
-
-function Punto({
-  titulo,
-  texto,
-  retraso,
-  desde = "abajo",
-}: {
-  titulo: string;
-  texto: string;
-  retraso: number;
-  desde?: "abajo" | "derecha";
-}) {
-  return (
-    <Revelar as="li" retraso={retraso} desde={desde} className="group">
-      <GromoSymbol
-        decorative
-        className="size-7 transition-transform duration-500 group-hover:-translate-y-1"
-      />
-      <h3 className="mt-4 text-lg font-bold">{titulo}</h3>
-      <p className="mt-2.5 max-w-md text-[15px] leading-relaxed text-gromo-gris">
-        {texto}
-      </p>
-    </Revelar>
   );
 }
