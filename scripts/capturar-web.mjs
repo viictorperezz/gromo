@@ -29,7 +29,9 @@ async function main() {
     const page = await context.newPage();
     await page.goto(BASE, { waitUntil: "networkidle" });
     await page.waitForFunction(() => document.fonts.ready.then(() => true));
-    await page.waitForTimeout(500);
+    // La entrada del hero dura ~2,8 s. Capturar antes deja la composición a
+    // medio dibujar y hace pensar que hay trazos sueltos.
+    await page.waitForTimeout(3400);
 
     await page.screenshot({ path: `${SALIDA}/${v.nombre}-hero.png` });
     await page.screenshot({ path: `${SALIDA}/${v.nombre}-completa.png`, fullPage: true });

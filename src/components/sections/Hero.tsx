@@ -32,32 +32,9 @@ export function Hero() {
             className="text-[2.1rem] leading-[1.08] font-extrabold tracking-[-0.03em] text-balance sm:text-[3.25rem]"
           >
             {antes}
-            <span className="relative inline-block text-gromo-lima">
-              {HERO.destacado}
-              {/* Subrayado que se dibuja después del titular */}
-              <svg
-                viewBox="0 0 200 10"
-                preserveAspectRatio="none"
-                aria-hidden
-                className="absolute inset-x-0 -bottom-1 h-2.5 w-full"
-              >
-                <path
-                  d="M2 7 C50 2 150 2 198 6"
-                  fill="none"
-                  stroke="#A8E063"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  opacity="0.55"
-                  pathLength="1"
-                  style={{
-                    strokeDasharray: 1,
-                    strokeDashoffset: 1,
-                    animation:
-                      "gromo-trazar 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.95s forwards",
-                  }}
-                />
-              </svg>
-            </span>
+            {/* El color ya destaca las palabras. Un subrayado encima seria
+                decoracion repetida, y ademas chocaba con la linea siguiente. */}
+            <span className="text-gromo-lima">{HERO.destacado}</span>
             {despues}
           </h1>
 
