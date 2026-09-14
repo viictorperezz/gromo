@@ -148,9 +148,10 @@ export function GromoLogo({
       <GromoSymbol tone={tone} decorative className="h-9 w-9" />
       <span
         className={cn(
-          // Inter 700, no 800: medido contra el lockup de Canva, Bold da 5,9 %
-          // de desvío en ancho y grosor de asta frente al 14,1 % de ExtraBold.
-          "text-[1.75rem] leading-none font-bold tracking-[-0.02em]",
+          // Inter 800, confirmado por el fundador (es lo que eligió en Canva).
+          // La medición sobre el PNG apuntaba a 700, pero el umbral descartaba
+          // el borde antialiasado y adelgazaba el trazo medido.
+          "text-[1.75rem] leading-none font-extrabold tracking-[-0.02em]",
           wordmarkClassName,
         )}
       >
