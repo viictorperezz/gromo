@@ -17,13 +17,10 @@ export function Hero() {
     <section className="relative isolate overflow-hidden bg-gromo-tinta text-gromo-hueso">
       <div className="relative mx-auto grid w-full max-w-6xl items-center gap-12 px-5 pt-[124px] pb-20 sm:px-8 sm:pt-36 sm:pb-28 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 lg:pt-40">
         <div>
-          {/* Mismo filete que los antetítulos de sección: es el motivo de
-              identidad, no una cápsula decorativa. */}
           <p
             style={entrar(80)}
-            className="mb-6 flex items-center gap-3 text-[15px] font-semibold text-gromo-lima"
+            className="mb-4 text-[15px] font-bold text-gromo-lima"
           >
-            <span aria-hidden className="h-[3px] w-7 rounded-full bg-current" />
             {HERO.antetitulo}
           </p>
 

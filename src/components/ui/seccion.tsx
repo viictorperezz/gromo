@@ -37,11 +37,11 @@ export function Seccion({
  *
  * Caja baja y tracking normal a propósito: la etiqueta en mayúsculas con
  * letra muy espaciada ("EL PROBLEMA", "LAS AYUDAS") es el atajo tipográfico
- * más reconocible de una página generada, y no aporta nada que el tamaño y
- * el color no hagan ya.
+ * más reconocible de una página generada.
  *
- * El motivo de identidad es el filete corto que la precede: es el tallo del
- * brote, tumbado, y se repite en todas las secciones.
+ * Sin adorno delante. Llevaba un filete corto y, repetido ocho veces, dejaba
+ * de leerse como motivo y pasaba a leerse como tic. El color de marca y el
+ * peso ya separan la etiqueta del titular sin necesidad de dibujar nada.
  */
 export function Antetitulo({
   children,
@@ -53,11 +53,10 @@ export function Antetitulo({
   return (
     <p
       className={cn(
-        "mb-4 flex items-center gap-3 text-[15px] font-semibold",
+        "mb-3 text-[15px] font-bold",
         tono === "tinta" ? "text-gromo-lima" : "text-gromo-verde-oscuro",
       )}
     >
-      <span aria-hidden className="h-[3px] w-7 rounded-full bg-current" />
       {children}
     </p>
   );

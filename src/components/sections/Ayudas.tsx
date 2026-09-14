@@ -6,10 +6,19 @@ import { Revelar } from "@/components/ui/revelar";
 import { AYUDAS } from "@/lib/contenido";
 import { cn } from "@/lib/utils";
 
+/**
+ * useGrouping en true a propósito.
+ *
+ * En español los números de cuatro cifras no llevan punto de millar, así que
+ * por defecto Intl escribe "5000 €". Es correcto, pero el resto de la web y
+ * los materiales de venta escriben "5.000 €", y aquí manda la coherencia:
+ * estas cifras son la comparación que el visitante se lleva en la cabeza.
+ */
 const EUROS = new Intl.NumberFormat("es-ES", {
   style: "currency",
   currency: "EUR",
   maximumFractionDigits: 0,
+  useGrouping: true,
 });
 
 /**

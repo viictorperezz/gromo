@@ -47,7 +47,9 @@ async function main() {
         const el = page.locator(`#${s}`);
         if (await el.count()) {
           await el.scrollIntoViewIfNeeded();
-          await page.waitForTimeout(250);
+          // El revelado dura 700 ms y se escalona hasta ~320 ms: menos espera
+          // y las capturas salen con elementos a medio aparecer.
+          await page.waitForTimeout(1400);
           await el.screenshot({ path: `${SALIDA}/seccion-${s}.png` });
         }
       }
