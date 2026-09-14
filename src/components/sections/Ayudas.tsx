@@ -96,7 +96,8 @@ export function Ayudas() {
                     aria-checked={c === cobertura}
                     onClick={() => setCobertura(c)}
                     className={cn(
-                      "rounded-full py-2.5 text-[15px] font-bold transition-colors duration-300",
+                      // min-h-11: 44 px, el minimo para el pulgar
+                      "min-h-11 rounded-full text-[15px] font-bold transition-colors duration-300",
                       c === cobertura
                         ? "bg-gromo-lima text-gromo-tinta"
                         : "text-gromo-hueso/60 hover:text-gromo-hueso",

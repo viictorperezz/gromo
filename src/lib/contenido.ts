@@ -35,6 +35,11 @@ export const HERO = {
     "Proyecto tipo: 60 horas tope, 5.000 € + IVA. Según tu comunidad, las ayudas públicas a la digitalización cubren entre el 50 % y el 80 %, así que el coste neto suele quedar entre 1.000 € y 2.500 €.",
 } as const;
 
+export const VIDEO = {
+  pausar: "Pausar vídeo",
+  reanudar: "Reanudar vídeo",
+} as const;
+
 export const PROBLEMA = {
   antetitulo: "El problema",
   titulo: "El cuello de botella no es la tecnología. Son las horas.",
@@ -170,7 +175,7 @@ export const PORQUE = {
     {
       titulo: "Precio cerrado, y pequeño",
       texto:
-        "5.000 € con tope de horas por escrito. Sin presupuestos sorpresa a mitad de proyecto. Es el tamaño que las consultoras grandes no quieren coger.",
+        "5.000 € con tope de horas por escrito; con la ayuda se queda entre 1.000 € y 2.500 €. Sin presupuestos sorpresa a mitad de proyecto: es el tamaño que las consultoras grandes no quieren coger.",
     },
     {
       titulo: "El papeleo va incluido",
@@ -180,7 +185,7 @@ export const PORQUE = {
     {
       titulo: "Hablas siempre con quien lo hace",
       texto:
-        "Sin comerciales, sin juniors, sin capas. La persona del diagnóstico es la que escribe el código y la que responde el teléfono.",
+        "La persona que te hace el diagnóstico es la que escribe el código y la que te responde el teléfono. Sin juniors ni capas.",
     },
     {
       titulo: "Se mide o no es un proyecto",

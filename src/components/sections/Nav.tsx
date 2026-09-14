@@ -39,7 +39,13 @@ export function Nav() {
       )}
     >
       <div className="mx-auto flex h-[72px] w-full max-w-6xl items-center justify-between px-5 sm:px-8">
-        <Link href="/" aria-label="Gromo, inicio" className="shrink-0">
+        {/* min-h-11 sin alterar la barra: el logo medía 42 px de alto y se
+            quedaba justo por debajo del mínimo para el pulgar. */}
+        <Link
+          href="/"
+          aria-label="Gromo, inicio"
+          className="flex min-h-11 shrink-0 items-center"
+        >
           <GromoLogo
             className={sobreOscuro ? "text-gromo-hueso" : "text-gromo-tinta"}
           />

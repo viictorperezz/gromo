@@ -49,6 +49,15 @@ export function Revelar({
     const el = ref.current;
     if (!el) return;
 
+    // Sin IntersectionObserver no hay forma de saber cuándo entra en pantalla:
+    // se deja visible por estilo directo, sin pasar por el estado. El revelado
+    // es una mejora, nunca el interruptor que decide si se puede leer la página.
+    if (typeof IntersectionObserver === "undefined") {
+      el.style.opacity = "1";
+      el.style.transform = "none";
+      return;
+    }
+
     const observador = new IntersectionObserver(
       ([entrada]) => {
         if (entrada.isIntersecting) {
@@ -66,6 +75,7 @@ export function Revelar({
   return (
     <Etiqueta
       ref={ref as React.Ref<never>}
+      data-revelar=""
       style={{ transitionDelay: `${retraso}ms` }}
       className={cn(
         "transition-[opacity,transform] duration-700 ease-out motion-reduce:opacity-100 motion-reduce:transform-none",

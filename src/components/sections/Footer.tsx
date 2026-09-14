@@ -26,12 +26,15 @@ export function Footer() {
               <h2 className="mb-4 text-[14px] font-bold text-gromo-tinta">
                 Secciones
               </h2>
-              <ul className="grid gap-2.5">
+              {/* min-h-11 son 44 px: el mínimo para acertar con el pulgar.
+                  El enlace es el que crece, no el hueco entre elementos, para
+                  que la zona táctil y la zona visible coincidan. */}
+              <ul className="grid">
                 {NAV.map((i) => (
                   <li key={i.href}>
                     <a
                       href={i.href}
-                      className="text-[14px] text-gromo-tinta/75 transition hover:text-gromo-tinta"
+                      className="inline-flex min-h-11 items-center text-[14px] text-gromo-tinta/75 transition hover:text-gromo-tinta"
                     >
                       {i.texto}
                     </a>
@@ -44,12 +47,12 @@ export function Footer() {
               <h2 className="mb-4 text-[14px] font-bold text-gromo-tinta">
                 Legal
               </h2>
-              <ul className="grid gap-2.5">
+              <ul className="grid">
                 {LEGALES.map((l) => (
                   <li key={l.href}>
                     <Link
                       href={l.href}
-                      className="text-[14px] text-gromo-tinta/75 transition hover:text-gromo-tinta"
+                      className="inline-flex min-h-11 items-center text-[14px] text-gromo-tinta/75 transition hover:text-gromo-tinta"
                     >
                       {l.texto}
                     </Link>
@@ -66,7 +69,7 @@ export function Footer() {
           </p>
           <a
             href={`mailto:${MARCA.email}`}
-            className="transition hover:text-gromo-tinta"
+            className="inline-flex min-h-11 items-center transition hover:text-gromo-tinta"
           >
             {MARCA.email}
           </a>

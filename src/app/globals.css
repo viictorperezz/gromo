@@ -222,6 +222,20 @@
   }
 }
 
+/* ---------------------------------------------------------------
+   Sin JavaScript, y al imprimir o guardar en PDF
+   El revelado necesita JS para saber cuándo entra un bloque en
+   pantalla. Si no lo hay (o si el papel no sabe de scroll), el
+   contenido tiene que verse entero: la animación es una mejora,
+   nunca el interruptor que decide si se puede leer la página.
+   --------------------------------------------------------------- */
+@media (scripting: none), print {
+  [data-revelar] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

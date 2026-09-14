@@ -237,6 +237,29 @@ Depende de decisiones y cuentas del fundador:
 
 ---
 
+## 12 bis. Addendum: vídeo en bucle del hero (14-sep-2026, otro agente)
+
+El fundador aportó un vídeo de marca de 10 s (brote con líneas de datos,
+`gemini_generated_video_*.mov`, HEVC, que Chrome no reproduce). Se convirtió a
+`public/videos/gromo-bucle.mp4` (H.264, ~95 KB) + `.webm` + póster JPG, y
+sustituye a `BroteAnimado` en el hero (`VideoBucle.tsx`). Solo MP4
+(H.264, ~95 KB): con dos `<source>` Chrome abortaba la primera descarga
+(ERR_ABORTED); y con `preload="metadata"` + `play()` abortaba el rango de
+metadatos. Con `preload="auto"` y una sola fuente, cero avisos (verificado).
+
+Aviso de dial: un bucle tensiona el MOTION 2 declarado. Contención aplicada:
+solo reproduce visible (IO ≥ 25 %), con `prefers-reduced-motion` no arranca
+solo, y el control de pausa existe pero oculto hasta foco de teclado
+(WCAG 2.2.2 sin símbolo visible). Sin tarjeta ni borde: el negro del vídeo
+está aplastado a cero puro (medido por zonas: era 16/31/24), así que el
+`mix-blend-screen` lo funde de forma exacta en cualquier pantalla. Se probó
+antes una máscara radial, pero dejaba parche visible. Quedaba un escalón de
+±1 nivel por redondeo YUV del decodificador (medido en página: 36 vs 35 en
+verde): se disuelve con un velo de sombra interior del color tinta en una
+capa superpuesta (la sombra sobre el propio <video> no pinta, porque el
+fotograma es contenido reemplazado y queda por encima).
+Los textos del botón viven en `VIDEO` dentro de `contenido.ts`.
+
 ## 12. Contexto de negocio que condiciona decisiones
 
 - El fundador dispone de **7,5 h/semana**. Toda propuesta de mantenimiento debe

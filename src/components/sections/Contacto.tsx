@@ -133,7 +133,7 @@ export function Contacto() {
             )}
           </p>
 
-          <p className="mt-4 text-[12px] leading-relaxed text-gromo-hueso/45">
+          <p className="mt-4 text-[13px] leading-relaxed text-gromo-hueso/55">
             Al enviar aceptas que trate tus datos para responderte. No los cedo a
             nadie ni te apunto a ninguna lista.
           </p>

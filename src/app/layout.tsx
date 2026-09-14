@@ -30,6 +30,21 @@ export const metadata: Metadata = {
     title: "Gromo, automatización e IA para pymes",
     description:
       "Te quito de encima el trabajo manual que no deja margen. Precio cerrado, resultado medible y el papeleo de la ayuda incluido.",
+    images: [
+      {
+        url: "/brand/gromo-og.png",
+        width: 1200,
+        height: 630,
+        alt: "Gromo — automatización e IA para pymes",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Gromo, automatización e IA para pymes",
+    description:
+      "Te quito de encima el trabajo manual que no deja margen. Precio cerrado, resultado medible y el papeleo de la ayuda incluido.",
+    images: ["/brand/gromo-og.png"],
   },
 };
 

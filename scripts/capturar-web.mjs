@@ -16,6 +16,28 @@ const VISTAS = [
 
 const SECCIONES = ["problema", "que-hago", "como", "ayudas", "por-que", "faq", "contacto"];
 
+/**
+ * Recorre la página hasta abajo para que se disparen los revelados.
+ *
+ * `fullPage: true` no hace scroll: compone la captura sin que ningún bloque
+ * llegue a entrar en pantalla, así que las secciones que esperan al
+ * IntersectionObserver salen invisibles y parece que la web está rota.
+ */
+async function revelarTodo(page) {
+  await page.evaluate(async () => {
+    const paso = Math.max(200, Math.round(window.innerHeight * 0.7));
+    const alto = document.documentElement.scrollHeight;
+    for (let y = 0; y < alto; y += paso) {
+      window.scrollTo(0, y);
+      await new Promise((r) => setTimeout(r, 200));
+    }
+    window.scrollTo(0, 0);
+    await new Promise((r) => setTimeout(r, 300));
+  });
+  // De vuelta arriba, deja terminar la transición de 700 ms y los escalonados.
+  await page.waitForTimeout(1400);
+}
+
 async function main() {
   await mkdir(SALIDA, { recursive: true });
   const browser = await chromium.launch({ channel: "chrome" });
@@ -34,6 +56,8 @@ async function main() {
     await page.waitForTimeout(3400);
 
     await page.screenshot({ path: `${SALIDA}/${v.nombre}-hero.png` });
+    // Antes de la captura completa, revela lo que espera al scroll.
+    await revelarTodo(page);
     await page.screenshot({ path: `${SALIDA}/${v.nombre}-completa.png`, fullPage: true });
 
     // Comprueba que la página no se desborda a lo ancho

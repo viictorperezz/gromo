@@ -1,4 +1,4 @@
-import { BroteAnimado } from "@/components/brand/BroteAnimado";
+import { VideoBucle } from "@/components/brand/VideoBucle";
 import { Boton } from "@/components/ui/boton";
 import { HERO } from "@/lib/contenido";
 
@@ -63,7 +63,7 @@ export function Hero() {
         </div>
 
         <div className="relative -order-1 lg:order-none">
-          <BroteAnimado className="mx-auto max-w-[420px] lg:max-w-none" />
+          <VideoBucle className="mx-auto w-full max-w-[560px] lg:max-w-none" />
         </div>
       </div>
     </section>
