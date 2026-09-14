@@ -9,6 +9,7 @@ import {
   Poppins,
 } from "next/font/google";
 import { GromoLogo, GromoSymbol } from "@/components/brand/GromoLogo";
+import { rutaPublica } from "@/lib/rutas";
 
 /* Candidatas para identificar la tipografía del lockup de Canva.
    Se cargan solo en esta ruta interna, no en la web pública. */
@@ -186,7 +187,7 @@ export default function MarcaPage() {
               style={{
                 width: 570 * ESCALA,
                 height: 135 * ESCALA,
-                backgroundImage: "url(/brand/lockup-vertical-claro.png)",
+                backgroundImage: `url(${rutaPublica("/brand/lockup-vertical-claro.png")})`,
                 backgroundSize: `${1254 * ESCALA}px ${1254 * ESCALA}px`,
                 backgroundPosition: `${-342 * ESCALA}px ${-952 * ESCALA}px`,
                 backgroundRepeat: "no-repeat",

@@ -1,0 +1,70 @@
+# Publica la web en GitHub Pages como vista previa visual.
+#
+# Ojo: es una exportación estática. El formulario de contacto NO envía aquí,
+# porque sin servidor no hay Server Actions; en su lugar se muestra un aviso y
+# el correo directo. Para el despliegue de verdad, con formulario funcionando,
+# el destino es un alojamiento con servidor (Vercel encaja sin configuración).
+
+name: Publicar en GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  # Permite lanzarlo a mano desde la pestaña Actions
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Si se empuja dos veces seguidas, deja terminar la publicación en curso
+# y encola la siguiente en lugar de cancelarla a medias.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  construir:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Compilar en estático
+        env:
+          EXPORT_ESTATICO: "1"
+          # Una página de proyecto se sirve en usuario.github.io/NOMBRE, así que
+          # todas las rutas necesitan ese prefijo. Se toma del propio repositorio
+          # para no tener que escribirlo a mano ni actualizarlo si se renombra.
+          BASE_PATH: /${{ github.event.repository.name }}
+        run: npm run build
+
+      - name: Desactivar Jekyll
+        # Sin este fichero, GitHub Pages ignora las carpetas que empiezan por
+        # guion bajo, y Next.js pone todo el CSS y el JavaScript en _next/.
+        # El resultado sería la web sin estilos.
+        run: touch out/.nojekyll
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  publicar:
+    needs: construir
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.despliegue.outputs.page_url }}
+    steps:
+      - id: despliegue
+        uses: actions/deploy-pages@v4

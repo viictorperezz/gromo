@@ -1,6 +1,9 @@
 import type { MetadataRoute } from "next";
 import { LEGAL } from "@/lib/contenido";
 
+/** Necesario para la exportación estática: el fichero no depende de la petición. */
+export const dynamic = "force-static";
+
 /**
  * Mientras falten los datos identificativos del aviso legal, la web NO debe
  * indexarse: publicarla sin identificar al prestador incumple la LSSI-CE.

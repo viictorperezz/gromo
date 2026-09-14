@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { VIDEO } from "@/lib/contenido";
+import { rutaPublica } from "@/lib/rutas";
 import { cn } from "@/lib/utils";
 
 /**
@@ -78,7 +79,7 @@ export function VideoBucle({ className }: { className?: string }) {
         // y al llamar a play() cancela esa descarga (ERR_ABORTED en consola).
         // El archivo pesa 95 KB: descargarlo entero de entrada es lo correcto.
         preload="auto"
-        poster="/videos/gromo-bucle-poster.jpg"
+        poster={rutaPublica("/videos/gromo-bucle-poster.jpg")}
         disablePictureInPicture
         aria-hidden="true"
         tabIndex={-1}
@@ -86,7 +87,7 @@ export function VideoBucle({ className }: { className?: string }) {
         // primera descarga especulativa y deja un ERR_ABORTED en consola.
         // El H.264 lo reproduce todo (Chrome, Safari, Firefox, Edge); el WebM
         // solo ahorraba 15 KB a cambio de ese aviso.
-        src="/videos/gromo-bucle.mp4"
+        src={rutaPublica("/videos/gromo-bucle.mp4")}
       />
       {/* Velo que disuelve el borde: la sombra interior tiene que ir en una
           capa por encima del vídeo (sobre un <video> no pinta, porque el
