@@ -11,9 +11,10 @@
 ## 1. Qué es esto
 
 Landing de una página para **Gromo**, estudio unipersonal de automatización de
-procesos e IA para pymes no tecnológicas en España. El fundador es economista con
-máster en Business Intelligence, trabaja por cuenta ajena y montará esto como
-autónomo en pluriactividad. Aún **no tiene clientes ni alta fiscal**.
+procesos e IA para pymes no tecnológicas en España. Formación del titular en
+economía y business intelligence. El proyecto **está arrancando: todavía no hay
+clientes ni datos fiscales que publicar**, y eso condiciona varias reglas de
+abajo.
 
 Producto que vende la web: proyecto de 60 horas tope por 5.000 € + IVA, del que
 las ayudas autonómicas a la digitalización cubren entre el 50 % y el 80 %.
@@ -38,6 +39,11 @@ Rutas: `/` (landing), `/aviso-legal`, `/privacidad`, `/cookies`, `/marca`
 
 ## 3. Fuentes de verdad (leer antes de tocar nada)
 
+> Las rutas que empiezan por `../` viven **fuera de este repositorio**: son los
+> documentos de negocio del titular y no se publican. Si has clonado esto desde
+> GitHub no los tendrás, y no es un error. Pídeselos si necesitas el contexto
+> completo; para auditar la web basta con lo que hay aquí dentro.
+
 | Archivo | Qué manda |
 |---|---|
 | `docs/brand/GROMO-BRIEF.md` | Paleta, tipografía, restricciones honestas. **Tiene prioridad sobre cualquier default.** |
@@ -59,9 +65,10 @@ Estas no son preferencias de estilo. Romper cualquiera es un fallo de entrega.
    éxito, logos, testimonios, cifras agregadas ("+50 proyectos") ni años de
    experiencia inflados. El valor número uno de la marca es no vender humo;
    contradecirlo en la propia home sería el error más caro posible.
-3. **Sin nombre propio ni foto del fundador.** Decisión suya por discreción
-   laboral: su empresa actual no debe encontrarle. La marca habla, la persona no.
-   Las preguntas frecuentes ya responden a "¿quién está detrás?" sin identificarle.
+3. **Sin nombre propio ni foto del titular.** Decisión expresa suya: en la web
+   habla la marca, no la persona. No la reabras ni "mejores" la sección de
+   quién está detrás añadiendo una firma o un retrato. Las preguntas frecuentes
+   ya responden a "¿quién está detrás?" sin identificar a nadie.
 4. **La web no debe indexarse** mientras `LEGAL.titular === "PENDIENTE"` en
    `contenido.ts`. `src/app/robots.ts` lo bloquea automáticamente. Publicar una
    web comercial española sin identificar al prestador incumple la LSSI-CE.

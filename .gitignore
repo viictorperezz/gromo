@@ -47,3 +47,9 @@ next-env.d.ts
 
 # Local temp files
 temp/
+
+# Capturas de las webs de referencia.
+# Se generan en local con scripts/capturar-referencias.mjs para estudiar su
+# estructura, pero NO se publican: son páginas completas de sitios ajenos, con
+# sus textos, sus imágenes y su marca. Republicarlas no nos corresponde.
+docs/design-references/referencias/

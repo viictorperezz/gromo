@@ -8,62 +8,50 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
-# Website Reverse-Engineer Template
+# Web de Gromo
 
-## What This Is
-A reusable template for reverse-engineering any website into a clean, modern Next.js codebase using AI coding agents. The Next.js + shadcn/ui + Tailwind v4 base is pre-scaffolded — just run `/clone-website <url1> [<url2> ...]`.
+Landing de un estudio de automatización de procesos e IA para pymes no
+tecnológicas. **Lee `HANDOFF-AUDITORIA.md` antes de trabajar**: ahí están las
+fuentes de verdad, las reglas que no se pueden romper y las trampas del entorno.
 
-## Tech Stack
-- **Framework:** Next.js 16 (App Router, React 19, TypeScript strict)
-- **UI:** shadcn/ui (Radix primitives, Tailwind CSS v4, `cn()` utility)
-- **Icons:** Lucide React (default — will be replaced/supplemented by extracted SVGs)
-- **Styling:** Tailwind CSS v4 with oklch design tokens
-- **Deployment:** Vercel
+## Comandos
 
-## Commands
-- `npm run dev` — Start dev server
-- `npm run build` — Production build
-- `npm run lint` — ESLint check
-- `npm run typecheck` — TypeScript check
-- `npm run check` — Run lint + typecheck + build
+- `npm run dev` — servidor de desarrollo
+- `npm run check` — lint, typecheck y build. Debe pasar limpio antes de entregar
+- `node scripts/auditar-movil.mjs` — auditoría móvil completa, con el servidor levantado
 
-## Code Style
-- TypeScript strict mode, no `any`
-- Named exports, PascalCase components, camelCase utils
-- Tailwind utility classes, no inline styles
-- 2-space indentation
-- Responsive: mobile-first
+## Estilo de código
 
-## Design Principles
-- **Pixel-perfect emulation** — match the target's spacing, colors, typography exactly
-- **No personal aesthetic changes during emulation phase** — match 1:1 first, customize later
-- **Real content** — use actual text and assets from the target site, not placeholders
-- **Beauty-first** — every pixel matters
+- TypeScript estricto, sin `any`
+- Exportaciones nombradas, componentes en PascalCase, utilidades en camelCase
+- Clases de Tailwind, sin estilos en línea salvo para animaciones con retardo
+- Dos espacios de indentación, primero móvil
+- Los comentarios explican **por qué**, no qué hace la línea siguiente
 
-## Project Structure
-```
-src/
-  app/              # Next.js routes
-  components/       # React components
-    ui/             # shadcn/ui primitives
-    icons.tsx       # Extracted SVG icons as React components
-  lib/
-    utils.ts        # cn() utility (shadcn)
-  types/            # TypeScript interfaces
-  hooks/            # Custom React hooks
-public/
-  images/           # Downloaded images from target site
-  videos/           # Downloaded videos from target site
-  seo/              # Favicons, OG images, webmanifest
-docs/
-  research/         # Inspection output (design tokens, components, layout)
-  design-references/ # Screenshots and visual references
-scripts/            # Asset download scripts
-```
+## Lo que este proyecto da por sentado
 
-## MOST IMPORTANT NOTES
-- When launching Claude Code agent teams, ALWAYS have each teammate work in their own worktree branch and merge everyone's work at the end, resolving any merge conflicts smartly since you are basically serving the orchestrator role and have full context to our goals, work given, work achieved, and desired outcomes.
-- After editing `AGENTS.md`, run `bash scripts/sync-agent-rules.sh` to regenerate platform-specific instruction files.
-- After editing `.claude/skills/clone-website/SKILL.md`, run `node scripts/sync-skills.mjs` to regenerate the skill for all platforms.
+1. **Los textos viven en `src/lib/contenido.ts`**, nunca dentro de los
+   componentes. Si vas a cambiar una frase, es ahí.
+2. **Nunca escribir «5.000 €» sin decir en la misma frase lo que queda con
+   ayuda.** Es la regla de venta del titular.
+3. **Cero prueba social inventada**: no hay clientes todavía, así que no hay
+   casos, logotipos, testimonios ni cifras agregadas. El valor número uno de la
+   marca es no vender humo.
+4. **Sin nombre propio ni fotografía del titular**, por discreción laboral.
+5. **La web no se indexa** mientras `LEGAL.titular` sea `PENDIENTE`;
+   `src/app/robots.ts` lo gestiona solo.
+6. El wordmark «Gromo» es texto en Inter 800, jamás una imagen.
 
-@docs/research/INSPECTION_GUIDE.md
+## Movimiento
+
+Dial declarado: **ENERGY 2 / RHYTHM 2 / MOTION 2**. Eso significa revelado al
+entrar en pantalla y transiciones al interactuar. **Ningún bucle perpetuo.**
+Todo se apaga con `prefers-reduced-motion`.
+
+## Antes de dar algo por terminado
+
+Verifícalo con un navegador, no de memoria. Los scripts de `scripts/` existen
+para eso. Una captura tomada demasiado pronto enseña elementos a medio aparecer
+que parecen fallos y no lo son: los tiempos de espera ya están ajustados.
+
+@docs/brand/GROMO-BRIEF.md
