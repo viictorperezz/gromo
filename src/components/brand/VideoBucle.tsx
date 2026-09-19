@@ -69,9 +69,25 @@ export function VideoBucle({ className }: { className?: string }) {
     // pantalla buena ese escalón se intuye. La sombra interior del color exacto
     // de la tinta disuelve el borde en ~14 px: ya no hay arista que detectar.
     <figure className={cn("group relative", className)}>
+      {/* Corrección de nivel del vídeo: el fondo del archivo decodifica con
+          +1 de verde por el redondeo del códec; sobre el screen eso sumaba a
+          la tinta y dejaba un rectángulo perceptible en un fondo tan plano.
+          El filtro resta ~3 niveles a cada canal (imperceptible en el brote)
+          y el fondo vuelve a coincidir exacto con la sección. */}
+      <svg width="0" height="0" aria-hidden focusable="false" className="absolute">
+        <defs>
+          <filter id="gromo-nivel-video" colorInterpolationFilters="sRGB">
+            <feComponentTransfer>
+              <feFuncR type="linear" slope="1" intercept="-0.012" />
+              <feFuncG type="linear" slope="1" intercept="-0.012" />
+              <feFuncB type="linear" slope="1" intercept="-0.012" />
+            </feComponentTransfer>
+          </filter>
+        </defs>
+      </svg>
       <video
         ref={ref}
-        className="block aspect-video w-full object-cover mix-blend-screen"
+        className="gromo-video block aspect-video w-full object-cover mix-blend-screen"
         muted
         loop
         playsInline

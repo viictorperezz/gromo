@@ -10,7 +10,10 @@
 
 export const MARCA = {
   nombre: "Gromo",
-  promesa: "IA aplicada para pymes que no son de tecnología",
+  promesa: "Automatización a medida para pymes que no son de tecnología",
+  /** Única pincelada de la metáfora en el cuerpo de la web (ver MARCA.md §7). */
+  significado:
+    "Gromo significa brote: que tu negocio crezca sin que crezca el trabajo manual.",
   dominio: "gromo.es",
   email: "hola@gromo.es",
 } as const;
@@ -24,15 +27,27 @@ export const NAV = [
 ] as const;
 
 export const HERO = {
-  antetitulo: "Automatización e IA para pymes",
-  titulo: "Te quito de encima el trabajo manual que no deja margen",
-  destacado: "trabajo manual",
+  titulo:
+    "Automatizo el trabajo que te come las horas. A medida, hecho para ti y tus procesos.",
+  /** Tiene que ser literal un trozo de `titulo`: Hero.tsx parte por él. */
+  destacado: "hecho para ti y tus procesos",
   entrada:
-    "Presupuestos, pedidos, documentación, reporting. Automatizo el proceso que más horas te come, con precio cerrado y una métrica antes y después. Si no veo ahorro claro, te lo digo y no hacemos nada.",
+    "Cuando empiezo tu proyecto no tengo otro abierto: lo llevo yo personalmente, de principio a fin, hasta que lo damos por cerrado. Lo adapto a tus procesos, con precio cerrado y una métrica antes y después para medir resultados.",
   ctaPrincipal: "Pide tu diagnóstico gratis",
   ctaSecundario: "Ver cómo funciona",
-  apunte:
-    "Proyecto tipo: 60 horas tope, 5.000 € + IVA. Según tu comunidad, las ayudas públicas a la digitalización cubren entre el 50 % y el 80 %, así que el coste neto suele quedar entre 1.000 € y 2.500 €.",
+  /**
+   * Una frase por línea, todas de largo parecido para que la lista tenga ritmo.
+   * El orden importa: primero lo que acabas pagando, después de dónde sale ese
+   * número. El precio y la ayuda van en la MISMA frase, unidos por «pero»:
+   * los 5.000 € no se enseñan nunca solos. La primera línea es el gancho y se
+   * pinta distinta en Hero.tsx; si se reordena la lista, se rompe eso.
+   */
+  apunte: [
+    "Un proyecto entero suele acabar costándote entre 1.000 € y 2.500 €.",
+    "El precio son 5.000 € + IVA, pero las ayudas públicas a la digitalización subvencionan entre el 50 % y el 80 %, según tu comunidad.",
+    "Los trámites de la ayuda van incluidos.",
+    "Y si prefieres no depender de una ayuda, también se puede hacer como proyecto privado.",
+  ],
 } as const;
 
 export const VIDEO = {
@@ -44,12 +59,12 @@ export const PROBLEMA = {
   antetitulo: "El problema",
   titulo: "El cuello de botella no es la tecnología. Son las horas.",
   entrada:
-    "En la mayoría de pymes industriales y de servicios hay dos o tres procesos que se comen el día de alguien con mejores cosas que hacer. Se aguantan porque siempre se hicieron así.",
+    "En casi todas las pymes hay dos o tres procesos que se comen el día de alguien que debería estar en otra cosa. Se aguantan porque siempre se hicieron así y porque arreglarlos nunca llega a ser lo urgente: siempre hay algo que entregar antes.",
   puntos: [
     {
-      titulo: "Se pasa a mano lo que ya está escrito",
+      titulo: "Se pasa todo a mano",
       texto:
-        "Datos que viajan de un PDF a un Excel y del Excel al ERP. Cada salto es una hora y una ocasión de equivocarse.",
+        "Datos que viajan de un PDF a un Excel y del Excel al ERP. Cada salto cuesta una hora y abre la puerta a un error.",
     },
     {
       titulo: "El presupuesto tarda días",
@@ -57,14 +72,24 @@ export const PROBLEMA = {
         "Y cuando sale, el cliente ya ha pedido otros dos. La velocidad de respuesta decide más ventas de las que parece.",
     },
     {
+      titulo: "Las mismas preguntas, una y otra vez",
+      texto:
+        "Precios, plazos, disponibilidad: clientes y comerciales preguntan lo mismo cada día, y alguien lo contesta a mano.",
+    },
+    {
+      titulo: "El papeleo que entra por la puerta",
+      texto:
+        "Facturas, albaranes, certificados. Alguien los revisa y los teclea en lugar de producir. Es trabajo real, aunque no se vea en la factura.",
+    },
+    {
       titulo: "Nadie sabe el número hasta fin de mes",
       texto:
         "El reporting se monta a mano, tarde, y para entonces la decisión ya se tomó a ojo.",
     },
     {
-      titulo: "Todo depende de una persona",
+      titulo: "Tienes los datos, pero no te dicen nada",
       texto:
-        "Si esa persona se va de vacaciones, el proceso se para. Eso no es un equipo, es un riesgo.",
+        "Todo queda registrado en algún sitio: albaranes, hojas de cálculo, correos. Pero nadie puede cruzarlo, así que no se sabe qué cliente deja margen de verdad, dónde se atasca cada pedido ni por qué este mes fue peor. Se decide con la intuición del que más tiempo lleva.",
     },
   ],
 } as const;
@@ -73,12 +98,15 @@ export const SERVICIOS = {
   antetitulo: "Qué automatizo",
   titulo: "Procesos concretos, no promesas",
   entrada:
-    "No vendo «IA». Vendo un proceso tuyo funcionando solo. Estos son los que mejor salen en una pyme que no es tecnológica.",
+    "No vendo «IA»: vendo un proceso tuyo funcionando solo. Estos seis son ejemplos, no un catálogo. Los pongo porque los conozco por dentro y para que veas de qué tipo de trabajo hablamos, pero lo que se automatiza en tu empresa sale del diagnóstico, no de esta lista.",
+  /** Cierra la sección para que la lista no se lea como un menú cerrado. */
+  cierre:
+    "¿No ves el tuyo aquí? Es lo normal: cada empresa se atasca en un sitio distinto. Cuéntamelo en el diagnóstico y te digo si compensa automatizarlo.",
   items: [
     {
       titulo: "Presupuestos y ofertas",
       texto:
-        "De la petición del cliente al presupuesto listo para revisar. Lees el correo o el pliego, sale el documento con tus precios y tus condiciones.",
+        "Tu histórico de presupuestos, ordenado y trabajando: las ofertas nuevas se montan semiautomáticas a partir de lo que ya has hecho y de tus condiciones de siempre. Tú revisas, ajustas y envías.",
     },
     {
       titulo: "Pedidos y albaranes",
@@ -114,30 +142,30 @@ export const PASOS = {
   items: [
     {
       n: "01",
-      titulo: "Diagnóstico de 45 minutos",
+      titulo: "Diagnóstico de 30 minutos",
       texto:
-        "Sin coste y sin compromiso. Miramos dos o tres procesos, calculamos horas y euros, y te digo si hay proyecto o no lo hay.",
+        "Sin coste y sin compromiso. Miramos dos o tres procesos, calculamos horas y euros, y te decimos si hay proyecto o no lo hay.",
       apunte: "Gratis",
     },
     {
       n: "02",
       titulo: "Propuesta de una página",
       texto:
-        "El problema con su número, qué voy a hacer, cómo mediremos que funcionó, el precio cerrado y el calendario. Una página, sin letra pequeña.",
+        "En 48 horas te enviamos la propuesta: el problema con su número, qué vamos a hacer, cómo mediremos que funcionó, el precio cerrado y el calendario. Todo a la vista y en una página: no hay letra pequeña ni partidas que aparezcan después.",
       apunte: "En 48 horas",
     },
     {
       n: "03",
-      titulo: "Ejecución con tope de horas",
+      titulo: "Ejecución del proyecto",
       texto:
-        "60 horas tope por escrito. Necesito una o dos horas tuyas y acceso a lo imprescindible; el resto lo hago yo. Si me paso de horas, es mi problema, no tu factura.",
-      apunte: "60 h tope",
+        "Una vez todo firmado, empezamos a trabajar. Necesitamos una o dos horas tuyas y acceso a lo imprescindible. Las reuniones de seguimiento quedan fijadas desde el principio, así que siempre sabes por dónde va el proyecto.",
+      apunte: "Normalmente 80 h",
     },
     {
       n: "04",
       titulo: "Entrega, medición y papeleo",
       texto:
-        "Te lo dejo funcionando, medimos contra el número de partida y preparo la documentación de la ayuda. Tú firmas.",
+        "Te lo entregamos funcionando y medimos con los mismos indicadores del principio: cómo iba antes y cómo va ahora. La documentación de la ayuda la preparamos nosotros entera. Tú solo firmas.",
       apunte: "Papeleo incluido",
     },
   ],
@@ -150,52 +178,69 @@ export const AYUDAS = {
     "Casi todas las comunidades tienen ayudas a la digitalización de pymes. Cambian el nombre, el porcentaje y el plazo, pero el mecanismo es el mismo: tú pagas el proyecto y la administración te devuelve una parte.",
   /** Precio del proyecto tipo, sin IVA. */
   base: 5000,
-  /** Tramos habituales de cobertura en las convocatorias autonómicas. */
-  coberturas: [50, 60, 70, 80],
-  coberturaPorDefecto: 70,
+  /**
+   * Los tramos de cobertura ya no viven aquí: dependen de la comunidad y los
+   * sirve `lib/ayudas-mock.ts` (hoy datos de prueba, mañana el backend).
+   */
   notas: [
     "Los importes son sin IVA. El IVA no suele ser subvencionable.",
     "El circuito habitual: el gasto tiene que estar hecho y pagado antes de solicitar. Por eso el calendario importa tanto como el precio.",
     "Preparo las tres ofertas, la memoria técnica y la justificación. Tú firmas y presentas.",
     "No todas las empresas encajan: hay exclusiones por actividad, por tamaño y por ayudas ya recibidas. Lo compruebo antes de que pierdas el tiempo.",
   ],
-  territorio:
-    "Trabajo en toda España. En Galicia y La Rioja conozco las convocatorias al detalle porque llevo tiempo siguiéndolas; en el resto de comunidades reviso la tuya antes de la reunión.",
 } as const;
 
+/**
+ * Esta sección era un resumen de la página (precio cerrado, papeleo, medición,
+ * un proyecto cada vez): cuatro de seis puntos repetían cosas ya dichas en el
+ * hero, en los pasos y en las ayudas. Ahora hace el único trabajo que no hacía
+ * nadie: la comparación con la alternativa real, que son consultoras y
+ * agencias de IA.
+ *
+ * Se comparan DOS MODELOS, no empresas concretas, y sin decir que el otro sea
+ * malo: es más honesto, no se puede desmentir, y en una web que presume de no
+ * vender humo, atacar al de al lado resta. El cierre reconoce en voz alta
+ * cuándo el otro modelo es el bueno.
+ */
 export const PORQUE = {
-  antetitulo: "Por qué Gromo",
-  titulo: "Pocos clientes, muy bien cuidados",
-  items: [
+  titulo: "Un proyecto cada vez. Ahora mismo, el tuyo.",
+  /** Dos párrafos: la segunda frase es la que abre la tabla, y sola pesa más. */
+  entrada: [
+    "La alternativa suele ser una consultora o una agencia de IA. No son peores: son otra cosa, con otro tamaño y otra forma de trabajar.",
+    "Esto es lo que cambia en el día a día.",
+  ],
+  columnas: {
+    otros: "Una consultora o una agencia",
+    gromo: "Gromo",
+  },
+  filas: [
     {
-      titulo: "Hablo de margen, no de algoritmos",
-      texto:
-        "Formación en economía y en business intelligence. La conversación va de horas, errores y euros. La tecnología es el medio, no el tema.",
+      tema: "Cuántos proyectos a la vez",
+      otros:
+        "Varios en paralelo. El tuyo avanza cuando le toca turno dentro de la carga del equipo.",
+      gromo:
+        "Uno. Si estoy acabando otro, te doy la fecha de inicio en el diagnóstico: puede ser en dos semanas o en un mes, pero es una fecha, no una lista de espera. Y cuando empieza el tuyo, no hay otro abierto.",
     },
     {
-      titulo: "Precio cerrado, y pequeño",
-      texto:
-        "5.000 € con tope de horas por escrito; con la ayuda se queda entre 1.000 € y 2.500 €. Sin presupuestos sorpresa a mitad de proyecto: es el tamaño que las consultoras grandes no quieren coger.",
+      tema: "Con quién hablas",
+      otros:
+        "Un comercial te vende, un jefe de proyecto te coordina y otra persona ejecuta. Lo que cuentas pasa por tres manos.",
+      gromo:
+        "Con quien lo hace. La misma persona que entiende tus procesos escribe el código, monta la IA donde hace falta, lo ajusta a vuestra forma de trabajar y coge el teléfono cuando llamas.",
     },
     {
-      titulo: "El papeleo va incluido",
-      texto:
-        "Las tres ofertas, la memoria y la justificación las preparo yo. De ellas depende que cobres la ayuda, así que no se dejan a medias.",
+      tema: "Cuándo se da por bueno",
+      otros:
+        "Cuando se entrega lo que ponía en el contrato. El alcance es el objetivo.",
+      gromo:
+        "Cuando el número se mueve. Fijamos horas, errores o días de ciclo antes de empezar, y al terminar se vuelve a medir.",
     },
     {
-      titulo: "Hablas siempre con quien lo hace",
-      texto:
-        "La persona que te hace el diagnóstico es la que escribe el código y la que te responde el teléfono. Sin juniors ni capas.",
-    },
-    {
-      titulo: "Se mide o no es un proyecto",
-      texto:
-        "Antes de empezar fijamos el número: horas al mes, errores, días de ciclo. Al terminar se vuelve a medir. Si no se puede medir, te lo digo.",
-    },
-    {
-      titulo: "Un proyecto cada vez",
-      texto:
-        "No cojo cinco a la vez para ir regular en todos. Cuando trabajo contigo, trabajo contigo.",
+      tema: "Si el proyecto no compensa",
+      otros:
+        "Hay una propuesta que hacer y una facturación que cumplir, así que casi siempre hay algo que vender.",
+      gromo:
+        "Te lo digo en el diagnóstico y no cobro nada. Prefiero perder una reunión que entregar algo que no aporta.",
     },
   ],
 } as const;
@@ -206,11 +251,11 @@ export const FAQ = {
   items: [
     {
       p: "No tengo tiempo para meterme en esto.",
-      r: "Justo por eso. El diagnóstico son 45 minutos y el proyecto sale con una o dos horas tuyas en total; el resto lo ejecuto yo. Si el proceso te come cuatro horas a la semana, el cálculo se hace solo.",
+      r: "Justo por eso. El diagnóstico son 30 minutos, y durante el proyecto necesito poco de ti: un par de horas al principio para entender bien el proceso y alguna reunión corta de seguimiento, fijada de antemano, para enseñarte por dónde va y que me corrijas si me desvío. El resto lo ejecuto yo. Si ese proceso te come cuatro horas a la semana, el cálculo se hace solo.",
     },
     {
-      p: "5.000 € me parece caro.",
-      r: "Sería caro si lo pagaras entero. Con una ayuda del 50 % al 80 % el coste neto queda entre 1.000 € y 2.500 €. Y en el diagnóstico calculamos cuántas horas al año ahorra, para que compares con un número y no con una sensación.",
+      p: "¿Cuánto acaba costándome a mí?",
+      r: "Entre 1.000 € y 2.500 €. El proyecto son 5.000 € + IVA, pero las ayudas a la digitalización subvencionan entre el 50 % y el 80 % según tu comunidad, y los trámites los llevo yo. Si la administración no la concede con el proyecto ya hecho, la diferencia la asumo yo. Y en el diagnóstico calculamos cuántas horas al año te ahorra, para que lo compares con un número y no con una sensación.",
     },
     {
       p: "¿Y si en mi caso esto no sirve?",
@@ -222,19 +267,23 @@ export const FAQ = {
     },
     {
       p: "La IA me suena a humo.",
-      r: "A mí también, tal y como se vende. Por eso aquí no hay demos genéricas: en el diagnóstico miramos un proceso tuyo y, si hace falta, te enseño la pieza funcionando antes de que firmes nada.",
+      r: "A mí también, tal y como se vende por ahí. Por eso aquí no se empieza por la tecnología, se empieza por tu proceso. A veces la solución lleva IA y a veces es ingeniería de datos pura y dura: conectar sistemas que no se hablan, ordenar la información y dejar el flujo trazable de principio a fin, de modo que puedas auditar qué pasó y cuándo. La herramienta se elige después, según lo que haga falta. Y no hay demos genéricas: en el diagnóstico miramos un proceso tuyo y, si hace falta, te enseño la pieza funcionando antes de que firmes nada.",
     },
     {
       p: "Mi empresa es pequeña para esto.",
-      r: "Está pensado exactamente para ese tamaño. Proyectos de 60 horas, precio cerrado y un resultado medible en semanas, no programas de transformación a dos años.",
+      r: "Está pensado exactamente para ese tamaño. Proyectos de 80 horas, precio cerrado y un resultado medible en semanas, no programas de transformación a dos años.",
     },
     {
       p: "¿Quién está detrás de Gromo?",
-      r: "Un proyecto pequeño y personal, no una consultora. Formación en economía y business intelligence, y experiencia en el sector. Verás la cara y el nombre en el diagnóstico; en la web prefiero que hablen las condiciones.",
+      r: "Un proyecto personal, no una consultora: detrás hay una sola persona, y te pongo cara y nombre en el diagnóstico. Vengo del negocio y de los datos: grado en Economía y máster en Business Intelligence, y más de cinco proyectos de digitalización y automatización llevados a producción. En la práctica eso significa dos cosas: que cuando hablamos de márgenes, de horas o de por qué un proceso cuesta lo que cuesta, entiendo de qué va; y que quien se sienta contigo en el diagnóstico es quien va a montarlo y quien te va a coger el teléfono después.",
+    },
+    {
+      p: "¿Y si ahora mismo estás con otro proyecto?",
+      r: "Entonces te digo cuándo empieza el tuyo. A veces son dos semanas, a veces un mes. El diagnóstico lo hacemos igual y sales sabiendo qué se automatizaría, cuánto ahorra y qué día se arranca; así el calendario de la ayuda también cuadra. Prefiero darte una fecha antes que cogerte ya y atenderte a medias.",
     },
     {
       p: "¿Y si la ayuda no sale?",
-      r: "Antes de la propuesta compruebo que encajas: actividad, tamaño, plazos y ayudas que ya hayas recibido. Si veo que no encaja, te lo digo antes de que gastes. Aun así, la concesión la decide la administración, no yo.",
+      r: "Antes de la propuesta compruebo que encajas: actividad, tamaño, plazos y ayudas que ya hayas recibido. Si veo que no encaja, te lo digo antes de que gastes. Y si aun así la administración no la concede con el proyecto ya hecho, la parte no subvencionada la asumo yo: pagas el neto que figuraba en la propuesta y la diferencia la pongo yo. El riesgo de la convocatoria no es tuyo.",
     },
   ],
 } as const;
@@ -243,10 +292,47 @@ export const CONTACTO = {
   antetitulo: "Siguiente paso",
   titulo: "Cuéntame qué proceso te come las horas",
   entrada:
-    "Escríbeme y te propongo una sesión de 45 minutos sin coste. Miramos dos o tres procesos y sales sabiendo qué se puede automatizar, cuánto ahorrarías y si hay una ayuda que encaje. Si no la hay, también te lo digo.",
+    "Escríbeme y te propongo una sesión de 30 minutos sin coste. Miramos dos o tres procesos y sales sabiendo qué se puede automatizar, cuánto ahorrarías y si hay una ayuda que encaje. Si no la hay, también te lo digo.",
+  /**
+   * Hueco para el calendario (Cal.com o similar). Todavía NO está conectado:
+   * se pinta como bloque desactivado y con la etiqueta a la vista, para no
+   * enseñar un botón que no hace nada.
+   *
+   * Al conectarlo: incrustar el calendario donde está la marca en
+   * Contacto.tsx, quitar `estado` y configurarlo a nombre de Gromo, SIN nombre
+   * propio ni foto (ver HANDOFF-TEXTOS-WEB.md §2.3), revisando también el
+   * nombre que sale en la invitación del calendario.
+   */
+  agenda: {
+    titulo: "Agenda tu diagnóstico",
+    texto: "Elige día y hora y te llega la invitación al correo.",
+    /**
+     * Maqueta: lunes a viernes con horario de oficina, como cualquier página
+     * de reservas. Los huecos reales los marcará el calendario cuando se
+     * conecte, no esta lista.
+     */
+    dias: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"],
+    horas: [
+      "09:00",
+      "09:30",
+      "10:00",
+      "10:30",
+      "11:00",
+      "11:30",
+      "12:00",
+      "12:30",
+      "16:00",
+      "16:30",
+      "17:00",
+      "17:30",
+      "18:00",
+      "18:30",
+    ],
+    duracion: "30 min",
+  },
   garantias: [
     "Sin coste y sin compromiso",
-    "45 minutos, por videollamada o teléfono",
+    "30 minutos, por videollamada o teléfono",
     "Respondo en menos de 24 horas laborables",
   ],
 } as const;

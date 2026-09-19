@@ -20,7 +20,7 @@ const JSON_LD = {
     {
       "@type": "ProfessionalService",
       name: MARCA.nombre,
-      description: `${MARCA.promesa}. Automatización de procesos con IA, precio cerrado y resultado medible.`,
+      description: `${MARCA.promesa}. Precio cerrado, resultado medible y el papeleo de la ayuda incluido.`,
       areaServed: { "@type": "Country", name: "España" },
       email: MARCA.email,
       knowsLanguage: ["es"],
@@ -51,8 +51,11 @@ export default function Home() {
         <Pasos />
         <Ayudas />
         <PorQue />
-        <Faq />
+        {/* El formulario va antes que las preguntas: quien ya está convencido
+            no tiene que atravesar ocho objeciones para escribir. Las preguntas
+            cierran la página para quien todavía duda. */}
         <Contacto />
+        <Faq />
       </main>
       <Footer />
     </>

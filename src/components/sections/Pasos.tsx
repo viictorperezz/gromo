@@ -1,4 +1,4 @@
-import { Antetitulo, Titulo } from "@/components/ui/seccion";
+import { Titulo } from "@/components/ui/seccion";
 import { Revelar } from "@/components/ui/revelar";
 import { PASOS } from "@/lib/contenido";
 
@@ -10,7 +10,6 @@ export function Pasos() {
     >
       <div className="mx-auto w-full max-w-6xl">
         <Revelar>
-          <Antetitulo tono="tinta">{PASOS.antetitulo}</Antetitulo>
           <Titulo>{PASOS.titulo}</Titulo>
         </Revelar>
 

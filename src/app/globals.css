@@ -223,6 +223,183 @@
 }
 
 /* ---------------------------------------------------------------
+   Intro de marca
+   Pantalla verde + brote cayendo por partes + "Gromo" escrito a
+   mano. Es todo CSS y SVG a propósito: se apaga sola y no depende de
+   JavaScript. Línea de tiempo (~3,5 s): tallo 0,08-0,7 · hojas
+   0,48-1,02 · escritura 0,95-2,53 (nueve trazos, ver IntroGromo.tsx)
+   · el contenido se desvanece y después el telón verde.
+   --------------------------------------------------------------- */
+
+/* El brote se arma pieza a pieza: el tallo cae y rebota, y luego cada
+   hoja cae y se asienta. Las clases las pone GromoSymbol. */
+.gromo-intro .gromo-parte {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes gromo-tallo-cae {
+  0% {
+    opacity: 0;
+    transform: translateY(-76px);
+    animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.55);
+  }
+  10% {
+    opacity: 1;
+  }
+  52% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.2, 0.7, 0.4, 1);
+  }
+  68% {
+    transform: translateY(-16px);
+    animation-timing-function: cubic-bezier(0.5, 0, 0.8, 0.4);
+  }
+  80% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.2, 0.7, 0.4, 1);
+  }
+  88% {
+    transform: translateY(-5px);
+    animation-timing-function: cubic-bezier(0.5, 0, 0.8, 0.4);
+  }
+  94%,
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes gromo-hoja-cae {
+  0% {
+    opacity: 0;
+    transform: translateY(-58px) rotate(-16deg);
+    animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.55);
+  }
+  10% {
+    opacity: 1;
+  }
+  58% {
+    transform: translateY(0) rotate(0deg);
+    animation-timing-function: cubic-bezier(0.2, 0.7, 0.4, 1);
+  }
+  74% {
+    transform: translateY(-9px) rotate(3deg);
+    animation-timing-function: cubic-bezier(0.5, 0, 0.8, 0.4);
+  }
+  88%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+.gromo-intro .gromo-parte--tallo {
+  animation: gromo-tallo-cae 620ms 80ms both;
+}
+
+.gromo-intro .gromo-parte--lima {
+  animation: gromo-hoja-cae 420ms 480ms both;
+}
+
+.gromo-intro .gromo-parte--verde {
+  animation: gromo-hoja-cae 420ms 600ms both;
+}
+
+@keyframes gromo-intro-contenido {
+  0%,
+  82% {
+    opacity: 1;
+  }
+  90%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* `visibility: hidden` al final no solo oculta: deja de capturar el
+   puntero, así que la página queda utilizable sin una línea de JS. */
+@keyframes gromo-intro-salir {
+  0%,
+  90% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* La palabra: el texto es la Inter 800 de siempre; la máscara solo deja
+   ver la parte por la que ya pasó la pluma. Cada trazo se revela con
+   `stroke-dashoffset` a ritmo lineal (pathLength=1 lo normaliza), con la
+   misma pausa y duración que tenía la punta al viajar. */
+.gromo-trazo__texto {
+  font-size: 100px;
+  font-weight: 800;
+  fill: currentColor;
+}
+
+.gromo-trazo__linea {
+  fill: none;
+  stroke: #fff;
+  /* Ancho generoso a propósito: la banda tiene que cubrir el grosor real
+     de la letra (14) con margen, o quedarían muescas sin revelar. */
+  stroke-width: 36;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: gromo-trazo-linea var(--dur, 200ms) linear var(--retraso, 0ms) both;
+}
+
+@keyframes gromo-trazo-linea {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.gromo-intro {
+  animation: gromo-intro-salir 3500ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.gromo-intro__contenido {
+  animation: gromo-intro-contenido 3500ms ease-out forwards;
+}
+
+/* El vídeo del hero, con el nivel corregido (ver VideoBucle.tsx): el
+   archivo decodifica con +1 de verde de fondo y el screen lo sumaba a la
+   tinta, dejando un rectángulo perceptible. */
+.gromo-video {
+  filter: url(#gromo-nivel-video);
+}
+
+/* Quien ya la vio en esta pestaña no la repite: el script en línea del
+   layout pone la clase antes de que se pinte nada, así no hay parpadeo. */
+.gromo-intro-vista .gromo-intro {
+  display: none;
+}
+
+/* Saltarla con un clic o un toque: se apaga en el sitio. */
+.gromo-intro--saltada {
+  animation: gromo-intro-saltar 220ms ease forwards;
+}
+
+@keyframes gromo-intro-saltar {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* Es decoración: quien pide menos movimiento no la ve, y en papel nunca
+   puede tapar el contenido. */
+@media (prefers-reduced-motion: reduce), print {
+  .gromo-intro {
+    display: none;
+  }
+}
+
+/* ---------------------------------------------------------------
    Sin JavaScript, y al imprimir o guardar en PDF
    El revelado necesita JS para saber cuándo entra un bloque en
    pantalla. Si no lo hay (o si el papel no sabe de scroll), el

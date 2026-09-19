@@ -1,4 +1,4 @@
-import { Antetitulo, Titulo } from "@/components/ui/seccion";
+import { Titulo } from "@/components/ui/seccion";
 import { Revelar } from "@/components/ui/revelar";
 import { PROBLEMA } from "@/lib/contenido";
 
@@ -16,7 +16,6 @@ export function Problema() {
       <div className="mx-auto grid w-full max-w-6xl gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
         <div className="lg:sticky lg:top-28 lg:self-start">
           <Revelar desde="izquierda">
-            <Antetitulo>{PROBLEMA.antetitulo}</Antetitulo>
             <Titulo>{PROBLEMA.titulo}</Titulo>
             <p className="mt-5 max-w-md text-base leading-relaxed text-gromo-gris sm:text-lg">
               {PROBLEMA.entrada}

@@ -1,9 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Antetitulo, Entrada, Titulo } from "@/components/ui/seccion";
+import { Entrada, Titulo } from "@/components/ui/seccion";
 import { Revelar } from "@/components/ui/revelar";
+import { Boton } from "@/components/ui/boton";
 import { AYUDAS } from "@/lib/contenido";
+import { COMUNIDAD_POR_DEFECTO, buscarComunidad } from "@/lib/ayudas-mock";
+import { SelectorComunidad } from "@/components/ui/selector-comunidad";
 import { cn } from "@/lib/utils";
 
 /**
@@ -57,12 +60,17 @@ function useNumero(destino: number, ms = 550): number {
 }
 
 export function Ayudas() {
-  const [cobertura, setCobertura] = useState<number>(AYUDAS.coberturaPorDefecto);
+  const [id, setId] = useState<string>(COMUNIDAD_POR_DEFECTO);
+  const comunidad = buscarComunidad(id);
 
-  const devuelven = Math.round((AYUDAS.base * cobertura) / 100);
-  const neto = AYUDAS.base - devuelven;
+  // El ejemplo se calcula con la cobertura típica de la comunidad, pero el
+  // tramo (min-max) viaja siempre al lado: la concesión la decide la
+  // administración, así que la cifra es un ejemplo, nunca una garantía.
+  const { min, max, tipica } = comunidad.cobertura;
+  const subvencion = Math.round((AYUDAS.base * tipica) / 100);
+  const neto = AYUDAS.base - subvencion;
 
-  const devuelvenAnim = useNumero(devuelven);
+  const subvencionAnim = useNumero(subvencion);
   const netoAnim = useNumero(neto);
 
   return (
@@ -72,66 +80,63 @@ export function Ayudas() {
     >
       <div className="mx-auto w-full max-w-6xl">
         <Revelar>
-          <Antetitulo>{AYUDAS.antetitulo}</Antetitulo>
+          {/* Sin antetítulo: lo decía tres veces seguidas (el enlace del menú,
+              el antetítulo y el título). */}
           <Titulo>{AYUDAS.titulo}</Titulo>
           <Entrada className="text-gromo-gris">{AYUDAS.entrada}</Entrada>
         </Revelar>
 
-        <div className="mt-12 grid gap-8 lg:grid-cols-[1.15fr_1fr] lg:gap-14">
+        {/* items-center: las notas se alinean con el centro de la calculadora
+            en vez de colgar del borde de arriba. */}
+        <div className="mt-12 grid gap-8 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:gap-14">
           <Revelar className="rounded-3xl bg-gromo-tinta p-7 text-gromo-hueso sm:p-10">
-            <fieldset>
-              <legend className="text-[15px] font-semibold text-gromo-hueso/60">
-                Cobertura de la ayuda en tu comunidad
-              </legend>
-              <div
-                role="radiogroup"
-                aria-label="Cobertura de la ayuda"
-                className="mt-4 grid grid-cols-4 gap-2 rounded-full bg-white/[0.06] p-1.5"
-              >
-                {AYUDAS.coberturas.map((c) => (
-                  <button
-                    key={c}
-                    type="button"
-                    role="radio"
-                    aria-checked={c === cobertura}
-                    onClick={() => setCobertura(c)}
-                    className={cn(
-                      // min-h-11: 44 px, el minimo para el pulgar
-                      "min-h-11 rounded-full text-[15px] font-bold transition-colors duration-300",
-                      c === cobertura
-                        ? "bg-gromo-lima text-gromo-tinta"
-                        : "text-gromo-hueso/60 hover:text-gromo-hueso",
-                    )}
-                  >
-                    {c} %
-                  </button>
-                ))}
-              </div>
-            </fieldset>
+            <p className="text-[15px] font-semibold text-gromo-hueso/70">
+              ¿Dónde está tu empresa?
+            </p>
+            <div className="mt-3">
+              <SelectorComunidad valor={comunidad} onCambio={setId} />
+            </div>
 
-            <dl className="mt-10 grid gap-5">
-              <Linea etiqueta="Precio del proyecto" valor={EUROS.format(AYUDAS.base)} />
+            <dl className="mt-8 grid gap-5">
               <Linea
-                etiqueta="Te devuelve la administración"
-                valor={`− ${EUROS.format(devuelvenAnim)}`}
+                etiqueta="Coste del proyecto de ejemplo"
+                valor={EUROS.format(AYUDAS.base)}
+              />
+              <Linea
+                etiqueta={`Subvención (${tipica} %)`}
+                valor={`− ${EUROS.format(subvencionAnim)}`}
                 acento
               />
             </dl>
 
             <div className="mt-8 border-t border-white/12 pt-8">
-              <dt className="text-[15px] font-semibold text-gromo-hueso/60">
-                Te cuesta de verdad
+              <dt className="text-[15px] font-semibold text-gromo-hueso/70">
+                Coste neto para ti
               </dt>
-              <dd className="mt-2 flex items-baseline gap-3">
-                <span className="text-[3rem] leading-none font-extrabold tracking-[-0.03em] text-gromo-lima tabular-nums sm:text-[4rem]">
+              <dd className="mt-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <span className="text-[2.75rem] leading-none font-extrabold tracking-[-0.03em] text-gromo-lima tabular-nums sm:text-[3.5rem]">
                   {EUROS.format(netoAnim)}
                 </span>
-                <span className="text-sm text-gromo-hueso/45">+ IVA</span>
+                <span className="text-sm text-gromo-hueso/60">+ IVA</span>
               </dd>
-              <p className="mt-4 text-[14px] leading-relaxed text-gromo-hueso/55">
-                Por un proyecto de 60 horas con el papeleo incluido. Mueve el
-                porcentaje para ver cómo queda según tu convocatoria.
+              {/* El tramo va pegado al número: sin él, el ejemplo se leería
+                  como una cifra garantizada, y la concede la administración. */}
+              <p className="mt-4 text-[14px] leading-relaxed text-gromo-hueso/60">
+                Ejemplo con el {tipica} % de cobertura. Según la convocatoria y
+                tu perfil, en {comunidad.nombre} suele moverse entre el {min} %
+                y el {max} %, así que el neto varía. La concesión la decide la
+                administración.
               </p>
+              <p className="mt-3 text-[14px] leading-relaxed text-gromo-hueso/60">
+                {comunidad.programa
+                  ? `Convocatoria de referencia: ${comunidad.programa}.`
+                  : "Reviso la convocatoria de tu comunidad antes de la reunión."}
+              </p>
+              {comunidad.nota && (
+                <p className="mt-3 text-[14px] leading-relaxed text-gromo-hueso/60">
+                  {comunidad.nota}
+                </p>
+              )}
             </div>
           </Revelar>
 
@@ -161,10 +166,12 @@ export function Ayudas() {
               ))}
             </ul>
 
-            <Revelar retraso={320}>
-              <p className="mt-8 rounded-2xl border border-gromo-verde/25 bg-white p-6 text-[15px] leading-relaxed text-gromo-gris">
-                {AYUDAS.territorio}
-              </p>
+            {/* La duda que deja la sección es «¿yo encajo?», y solo se
+                responde mirando el caso. El botón lleva al formulario. */}
+            <Revelar retraso={320} className="mt-8">
+              <Boton href="#contacto" variante="primario">
+                Comprueba si encajas en una ayuda
+              </Boton>
             </Revelar>
           </div>
         </div>

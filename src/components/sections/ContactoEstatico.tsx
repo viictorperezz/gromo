@@ -1,4 +1,4 @@
-import { Antetitulo, Titulo } from "@/components/ui/seccion";
+import { Titulo } from "@/components/ui/seccion";
 import { CONTACTO, MARCA } from "@/lib/contenido";
 
 /**
@@ -21,7 +21,6 @@ export function Contacto() {
     >
       <div className="mx-auto grid w-full max-w-6xl gap-12 lg:grid-cols-[1fr_1.15fr] lg:gap-20">
         <div>
-          <Antetitulo tono="tinta">{CONTACTO.antetitulo}</Antetitulo>
           <Titulo>{CONTACTO.titulo}</Titulo>
           <p className="mt-5 max-w-lg text-base leading-relaxed text-gromo-hueso/75 sm:text-lg">
             {CONTACTO.entrada}
@@ -46,6 +45,37 @@ export function Contacto() {
               </li>
             ))}
           </ul>
+
+          {/* Vista previa de la reserva. Aquí NO es interactiva a propósito:
+              esta versión se publica sin servidor, así que elegir hueco no
+              podría enviarse a ningún sitio. El selector de verdad está en
+              Contacto.tsx. */}
+          <div
+            className="mt-9 rounded-2xl border border-white/10 bg-white/[0.03] p-5 opacity-45"
+            aria-hidden
+          >
+            <h3 className="text-[15px] font-bold">{CONTACTO.agenda.titulo}</h3>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {CONTACTO.agenda.dias.map((d) => (
+                <span
+                  key={d}
+                  className="rounded-xl border border-white/15 px-3 py-2 text-[14px] font-semibold text-gromo-hueso/75"
+                >
+                  {d}
+                </span>
+              ))}
+            </div>
+            <div className="mt-3 grid grid-cols-3 gap-2 sm:grid-cols-4">
+              {CONTACTO.agenda.horas.slice(0, 8).map((h) => (
+                <span
+                  key={h}
+                  className="rounded-xl border border-white/15 py-2 text-center text-[14px] font-semibold text-gromo-hueso/75 tabular-nums"
+                >
+                  {h}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
 
         <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">

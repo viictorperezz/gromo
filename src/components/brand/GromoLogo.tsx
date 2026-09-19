@@ -104,12 +104,29 @@ export function GromoSymbol({
       {...a11y}
     >
       {/* Hoja izquierda — lima. Arco elíptico: el original es algo más ancho
-          que alto (262×252 px sobre lienzo de 1254), no cuadrado. */}
-      <path d="M24 28 A21 20 0 0 1 45 48 A21 20 0 0 1 24 28 Z" fill={f.lima} />
+          que alto (262×252 px sobre lienzo de 1254), no cuadrado. Las clases
+          `gromo-parte` las usa la intro para animar el brote por partes. */}
+      <path
+        d="M24 28 A21 20 0 0 1 45 48 A21 20 0 0 1 24 28 Z"
+        fill={f.lima}
+        className="gromo-parte gromo-parte--lima"
+      />
       {/* Hoja derecha — verde */}
-      <path d="M72 28 A21 20 0 0 0 51 48 A21 20 0 0 0 72 28 Z" fill={f.verde} />
+      <path
+        d="M72 28 A21 20 0 0 0 51 48 A21 20 0 0 0 72 28 Z"
+        fill={f.verde}
+        className="gromo-parte gromo-parte--verde"
+      />
       {/* Tallo */}
-      <rect x="45" y="26" width="6" height="44" rx="3" fill={f.tallo} />
+      <rect
+        x="45"
+        y="26"
+        width="6"
+        height="44"
+        rx="3"
+        fill={f.tallo}
+        className="gromo-parte gromo-parte--tallo"
+      />
     </svg>
   );
 }

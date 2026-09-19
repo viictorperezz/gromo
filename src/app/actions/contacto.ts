@@ -24,15 +24,23 @@ export async function enviarContacto(
   const email = texto(datos, "email");
   const telefono = texto(datos, "telefono");
   const proceso = texto(datos, "proceso");
+  const dia = texto(datos, "dia");
+  const hora = texto(datos, "hora");
 
   const errores: EstadoContacto["errores"] = {};
+  // El hueco elegido es lo que convierte esto en una reserva y no en un
+  // mensaje suelto, así que se pide antes que nada.
+  if (!dia || !hora) errores.cita = "Elige un día y una hora.";
   if (empresa.length < 2) errores.empresa = "Dime el nombre de la empresa.";
   if (nombre.length < 2) errores.nombre = "Dime cómo te llamas.";
   if (!EMAIL.test(email)) errores.email = "Ese correo no parece válido.";
   if (telefono.length > 0 && telefono.replace(/\D/g, "").length < 9) {
     errores.telefono = "El teléfono parece incompleto.";
   }
-  if (proceso.length < 15) {
+  // El proceso es opcional a propósito: mucha gente sabe que pierde horas pero
+  // no sabe nombrar el proceso, y exigirlo perdía justo esas solicitudes. Si
+  // escriben algo, sí pedimos que valga para preparar la reunión.
+  if (proceso.length > 0 && proceso.length < 15) {
     errores.proceso = "Cuéntame un poco más: qué proceso y cuánto tiempo os lleva.";
   }
 
@@ -41,13 +49,14 @@ export async function enviarContacto(
   }
 
   const cuerpo = [
+    `Hueco:    ${dia} a las ${hora}`,
     `Empresa:  ${empresa}`,
     `Nombre:   ${nombre}`,
     `Email:    ${email}`,
     `Teléfono: ${telefono || "(no indicado)"}`,
     "",
     "Proceso:",
-    proceso,
+    proceso || "(no lo tiene claro todavía)",
   ].join("\n");
 
   const clave = process.env.RESEND_API_KEY;

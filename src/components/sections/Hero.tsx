@@ -1,3 +1,4 @@
+import { TalloBrotes } from "@/components/brand/TalloBrotes";
 import { VideoBucle } from "@/components/brand/VideoBucle";
 import { Boton } from "@/components/ui/boton";
 import { HERO } from "@/lib/contenido";
@@ -17,15 +18,11 @@ export function Hero() {
     <section className="relative isolate overflow-hidden bg-gromo-tinta text-gromo-hueso">
       <div className="relative mx-auto grid w-full max-w-6xl items-center gap-12 px-5 pt-[124px] pb-20 sm:px-8 sm:pt-36 sm:pb-28 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 lg:pt-40">
         <div>
-          <p
-            style={entrar(80)}
-            className="mb-4 text-[15px] font-bold text-gromo-lima"
-          >
-            {HERO.antetitulo}
-          </p>
-
+          {/* Sin antetítulo a propósito: el que había («Automatización a
+              medida para pymes») repetía «a medida», que ya está en el titular.
+              La promesa sigue viva en el footer y en los metadatos. */}
           <h1
-            style={entrar(180)}
+            style={entrar(80)}
             className="text-[2.1rem] leading-[1.08] font-extrabold tracking-[-0.03em] text-balance sm:text-[3.25rem]"
           >
             {antes}
@@ -54,12 +51,27 @@ export function Hero() {
             </Boton>
           </div>
 
-          <p
-            style={entrar(560)}
-            className="mt-10 max-w-xl border-l-2 border-gromo-verde pl-4 text-sm leading-relaxed text-gromo-hueso/55"
-          >
-            {HERO.apunte}
-          </p>
+          {/* El filete de la izquierda no es una línea: es una enredadera.
+              Va absoluta para que el párrafo no se entere de su ancho, y con
+              altura completa para que crezca con el texto al reflujo móvil. */}
+          <div style={entrar(560)} className="relative mt-10 max-w-xl pl-11">
+            <TalloBrotes className="absolute top-0 left-0 h-full w-8" />
+            {/* La primera línea es el gancho (lo que acaba pagando), así que
+                sale del gris del resto: el ojo tiene que caer en el número
+                antes de leer de dónde sale. */}
+            <div className="grid gap-2 text-sm leading-relaxed text-gromo-hueso/55">
+              {HERO.apunte.map((linea, i) => (
+                <p
+                  key={linea}
+                  className={
+                    i === 0 ? "text-base font-semibold text-gromo-hueso" : undefined
+                  }
+                >
+                  {linea}
+                </p>
+              ))}
+            </div>
+          </div>
         </div>
 
         <div className="relative -order-1 lg:order-none">

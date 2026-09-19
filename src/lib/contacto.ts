@@ -7,6 +7,7 @@
  */
 
 export type CampoContacto =
+  | "cita"
   | "empresa"
   | "nombre"
   | "email"

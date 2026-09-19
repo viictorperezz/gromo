@@ -12,16 +12,24 @@ export function Footer() {
   return (
     <footer className="border-t border-black/10 bg-white px-5 py-14 sm:px-8">
       <div className="mx-auto w-full max-w-6xl">
-        <div className="flex flex-col gap-10 sm:flex-row sm:justify-between">
-          <div className="max-w-xs">
-            <GromoLogo className="text-gromo-tinta" />
-            <p className="mt-4 text-[14px] leading-relaxed text-gromo-gris">
-              {MARCA.promesa}. Automatización de procesos con precio cerrado y
-              resultado medible. Toda España.
+        {/* Tres bloques repartidos por todo el ancho. Antes la marca iba
+            encajonada a la izquierda y los enlaces pegados a la derecha, con
+            medio pie vacío en el centro. */}
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr] lg:gap-16">
+          <div className="max-w-md">
+            <Link href="/" aria-label="Gromo, inicio" className="inline-flex">
+              <GromoLogo className="text-gromo-tinta" />
+            </Link>
+            <p className="mt-5 text-[15px] leading-relaxed text-gromo-gris">
+              {MARCA.promesa}. Precio cerrado, resultado medible y el papeleo de
+              la ayuda incluido. Toda España.
+            </p>
+            <p className="mt-3 text-[15px] leading-relaxed text-gromo-gris">
+              {MARCA.significado}
             </p>
           </div>
 
-          <div className="flex gap-14">
+          <div className="contents">
             <nav aria-label="Secciones">
               <h2 className="mb-4 text-[14px] font-bold text-gromo-tinta">
                 Secciones
@@ -30,14 +38,17 @@ export function Footer() {
                   El enlace es el que crece, no el hueco entre elementos, para
                   que la zona táctil y la zona visible coincidan. */}
               <ul className="grid">
+                {/* Con la barra delante («/#problema») el enlace funciona
+                    también desde el aviso legal o las cookies, donde esa
+                    sección no existe y un ancla suelta no hacía nada. */}
                 {NAV.map((i) => (
                   <li key={i.href}>
-                    <a
-                      href={i.href}
+                    <Link
+                      href={`/${i.href}`}
                       className="inline-flex min-h-11 items-center text-[14px] text-gromo-tinta/75 transition hover:text-gromo-tinta"
                     >
                       {i.texto}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
