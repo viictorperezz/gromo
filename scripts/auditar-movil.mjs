@@ -241,18 +241,54 @@ console.log("\n5. CONTROLES a 390px");
   await page.goto(BASE, { waitUntil: "networkidle" });
   await page.waitForTimeout(900);
 
-  // Calculadora de ayudas
-  const radios = page.locator('[role="radio"]');
-  const n = await radios.count();
-  if (n > 0) {
+  // Calculadora de ayudas. Ya no son botones de porcentaje: se elige comunidad
+  // en un combobox y de ahi salen la subvencion y el neto.
+  const combo = page.locator('#ayudas [role="combobox"]');
+  if ((await combo.count()) > 0) {
     const antes = await page.locator("#ayudas dd").last().innerText();
-    await radios.first().tap();
-    await page.waitForTimeout(900);
-    const despues = await page.locator("#ayudas dd").last().innerText();
-    console.log(`   calculadora: ${n} opciones, ${antes.trim()} -> ${despues.trim()}`);
-    if (antes === despues) anota("calculadora", "tocar una opcion no cambia la cifra");
+    await combo.first().tap();
+    await page.waitForTimeout(400);
+    const opciones = page.locator('#ayudas [role="option"]');
+    const n = await opciones.count();
+    if (n === 0) {
+      anota("calculadora", "el desplegable de comunidad no abre la lista");
+    } else {
+      await opciones.last().tap();
+      await page.waitForTimeout(900);
+      const despues = await page.locator("#ayudas dd").last().innerText();
+      console.log(
+        `   calculadora: ${n} comunidades, ${antes.trim()} -> ${despues.trim()}`,
+      );
+    }
   } else {
-    anota("calculadora", "no se encuentran las opciones de cobertura");
+    anota("calculadora", "no se encuentra el selector de comunidad");
+  }
+
+  // Reserva: elegir dia tiene que habilitar las horas.
+  await page.locator("#contacto").scrollIntoViewIfNeeded();
+  await page.waitForTimeout(300);
+  const dias = page.locator('#contacto fieldset button[aria-pressed]');
+  if ((await dias.count()) === 0) {
+    console.log("   reserva: no hay selector de dia (version estatica)");
+  } else {
+    await dias.first().tap();
+    await page.waitForTimeout(300);
+    const horas = page.locator('#contacto button[aria-expanded]');
+    if ((await horas.count()) === 0) {
+      anota("reserva", "no aparece el desplegable de horas tras elegir dia");
+    } else {
+      await horas.first().tap();
+      await page.waitForTimeout(400);
+      const libres = await page
+        .locator('#contacto [aria-expanded="true"] ~ div button')
+        .count();
+      console.log(`   reserva: dia elegido, ${libres} horas a la vista`);
+      if (libres === 0) anota("reserva", "el desplegable de horas sale vacio");
+      // Cerrarlo: si se queda abierto, tapa los campos y el resto de la
+      // auditoria falla por clics interceptados.
+      await page.keyboard.press("Escape");
+      await page.waitForTimeout(300);
+    }
   }
 
   // Formulario: escribir y enviar vacio para ver la validacion

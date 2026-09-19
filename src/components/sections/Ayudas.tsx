@@ -76,7 +76,7 @@ export function Ayudas() {
   return (
     <section
       id="ayudas"
-      className="scroll-mt-28 bg-gromo-hueso px-5 py-20 text-gromo-tinta sm:px-8 sm:py-28"
+      className="scroll-mt-28 bg-gromo-hueso px-5 py-16 text-gromo-tinta sm:px-8 sm:py-24"
     >
       <div className="mx-auto w-full max-w-6xl">
         <Revelar>

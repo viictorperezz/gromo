@@ -19,7 +19,7 @@ export function Servicios() {
   return (
     <section
       id="que-hago"
-      className="scroll-mt-28 bg-white px-5 py-20 text-gromo-tinta sm:px-8 sm:py-28"
+      className="scroll-mt-28 bg-white px-5 py-16 text-gromo-tinta sm:px-8 sm:py-24"
     >
       <div className="mx-auto w-full max-w-6xl">
         <Revelar>

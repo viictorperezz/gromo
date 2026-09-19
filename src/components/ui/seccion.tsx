@@ -20,7 +20,9 @@ export function Seccion({
     <section
       id={id}
       className={cn(
-        "scroll-mt-28 px-5 py-20 sm:px-8 sm:py-28",
+        // 64/96 px: con 80/112 quedaban 224 px de vacío entre dos secciones en
+        // escritorio y la página se leía despegada.
+        "scroll-mt-28 px-5 py-16 sm:px-8 sm:py-24",
         tono === "claro" && "bg-white text-gromo-tinta",
         tono === "hueso" && "bg-gromo-hueso text-gromo-tinta",
         tono === "tinta" && "bg-gromo-tinta text-gromo-hueso",

@@ -17,7 +17,13 @@ export function Footer() {
             medio pie vacío en el centro. */}
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr] lg:gap-16">
           <div className="max-w-md">
-            <Link href="/" aria-label="Gromo, inicio" className="inline-flex">
+            {/* min-h-11: el logo mide 36 px de alto y se quedaba por debajo
+                del mínimo para el pulgar. */}
+            <Link
+              href="/"
+              aria-label="Gromo, inicio"
+              className="inline-flex min-h-11 items-center"
+            >
               <GromoLogo className="text-gromo-tinta" />
             </Link>
             <p className="mt-5 text-[15px] leading-relaxed text-gromo-gris">

@@ -11,7 +11,7 @@ export function Problema() {
   return (
     <section
       id="problema"
-      className="scroll-mt-28 bg-gromo-hueso px-5 py-20 text-gromo-tinta sm:px-8 sm:py-28"
+      className="scroll-mt-28 bg-gromo-hueso px-5 py-16 text-gromo-tinta sm:px-8 sm:py-24"
     >
       <div className="mx-auto grid w-full max-w-6xl gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
         <div className="lg:sticky lg:top-28 lg:self-start">

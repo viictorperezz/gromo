@@ -17,7 +17,7 @@ export function Contacto() {
   return (
     <section
       id="contacto"
-      className="scroll-mt-28 bg-gromo-tinta px-5 py-20 text-gromo-hueso sm:px-8 sm:py-28"
+      className="scroll-mt-28 bg-gromo-tinta px-5 py-14 text-gromo-hueso sm:px-8 sm:py-20"
     >
       <div className="mx-auto grid w-full max-w-6xl gap-12 lg:grid-cols-[1fr_1.15fr] lg:gap-20">
         <div>
