@@ -81,7 +81,7 @@ Cercano pero profesional. Honesto hasta cuando duele.
 **Prohibido:** "sinergias", "disrupción", "transformación digital 360", "soluciones holísticas",
 "partner estratégico", anglicismos vanidosos, y vender IA como palabra mágica.
 
-**Regla de oro del precio:** nunca escribir "5.000 €" sin escribir "~1.500 €" en la misma frase.
+**Regla de oro del precio:** nunca escribir "5.000 €" sin decir en la misma frase lo que le queda al cliente (entre 1.000 € y 2.500 € según la cobertura de su comunidad). Y **nunca un porcentaje concreto prometido**: siempre el tramo 50-80 % y "lo decide la administración".
 
 ---
 
@@ -90,17 +90,17 @@ Cercano pero profesional. Honesto hasta cuando duele.
 El orden final lo marca la referencia, pero el contenido es este:
 
 1. **Nav** — logo Gromo + 3-4 enlaces ancla + CTA "Diagnóstico gratis".
-2. **Hero** — promesa + subtítulo con el número (5.000 € → ~1.500 €) + CTA primario.
+2. **Hero** — promesa + apunte que abre por lo que acaba pagando (1.000-2.500 €) y solo después los 5.000 € + CTA primario.
 3. **Problema** — el dolor en lenguaje de dueño de pyme: horas en presupuestos, pedidos,
    documentación, reporting; errores; Excel.
-4. **Cómo funciona** — 3 pasos: diagnóstico 45 min → propuesta con métrica → proyecto
-   60 h con el papeleo incluido.
-5. **La ayuda** — cómo queda la cuenta. Ticket Innova 80 %, ADER 50 % (70 % ciber).
+4. **Cómo funciona** — 4 pasos: diagnóstico 30 min → propuesta en 48 h → ejecución
+   (80 h máximo) → entrega, medición y papeleo.
+5. **La ayuda** — cómo queda la cuenta, por comunidad y siempre por tramos.
    Explicar el flujo: el cliente adelanta, la ayuda le devuelve.
 6. **Qué automatizo** — presupuestos, pedidos, documentación, atención, reporting, trazabilidad.
 7. **Por qué yo** — economista + BI, papeleo incluido, precio cerrado y pequeño, trato directo.
 8. **FAQ / objeciones** — sacadas de `EMBUDO-VENTAS.md` §9.
-9. **CTA final** — sesión de diagnóstico de 45 min, sin coste.
+9. **CTA final** — reserva del diagnóstico de 30 min, sin coste.
 10. **Footer** — contacto, aviso legal, privacidad, cookies.
 
 ---

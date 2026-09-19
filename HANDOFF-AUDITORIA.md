@@ -16,7 +16,7 @@ economía y business intelligence. El proyecto **está arrancando: todavía no h
 clientes ni datos fiscales que publicar**, y eso condiciona varias reglas de
 abajo.
 
-Producto que vende la web: proyecto de 60 horas tope por 5.000 € + IVA, del que
+Producto que vende la web: proyecto de 80 horas máximo por 5.000 € + IVA, del que
 las ayudas autonómicas a la digitalización cubren entre el 50 % y el 80 %.
 
 **Pila:** Next.js 16 (App Router), React 19, TypeScript estricto, Tailwind v4.
