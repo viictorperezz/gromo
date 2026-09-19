@@ -18,6 +18,13 @@ export const MARCA = {
   email: "hola@gromo.es",
 } as const;
 
+/**
+ * Botón de la barra fija. Dice «agendar» igual que el hero y que la propia
+ * sección de contacto: antes la misma acción tenía cinco nombres distintos por
+ * la página y parecían cosas diferentes.
+ */
+export const CTA_BARRA = "Agendar diagnóstico";
+
 export const NAV = [
   { href: "#problema", texto: "El problema" },
   { href: "#que-hago", texto: "Qué automatizo" },
@@ -33,7 +40,7 @@ export const HERO = {
   destacado: "hecho para ti y tus procesos",
   entrada:
     "Cuando empiezo tu proyecto no tengo otro abierto: lo llevo yo personalmente, de principio a fin, hasta que lo damos por cerrado. Lo adapto a tus procesos, con precio cerrado y una métrica antes y después para medir resultados.",
-  ctaPrincipal: "Pide tu diagnóstico gratis",
+  ctaPrincipal: "Agenda tu diagnóstico gratis",
   ctaSecundario: "Ver cómo funciona",
   /**
    * Una frase por línea, todas de largo parecido para que la lista tenga ritmo.
@@ -169,6 +176,12 @@ export const PASOS = {
       apunte: "Papeleo incluido",
     },
   ],
+  /**
+   * Del hero a «Las ayudas» había tres secciones seguidas sin un solo botón.
+   * Aquí es donde el lector acaba de entender el proceso y piensa «¿y ahora?».
+   */
+  cierre: "Cuatro pasos, y el primero son 30 minutos que no cuestan nada.",
+  cta: "Agenda tu diagnóstico",
 } as const;
 
 export const AYUDAS = {
@@ -248,6 +261,10 @@ export const PORQUE = {
 export const FAQ = {
   antetitulo: "Preguntas",
   titulo: "Lo que suelen preguntarme",
+  /** El FAQ cierra la página: sin esta salida, quien resuelve su duda aquí se
+   *  queda mirando el pie con el único botón de la barra fija. */
+  cierre: "¿Tu duda no está aquí? Pregúntamela en el diagnóstico.",
+  cta: "Agenda tu diagnóstico",
   items: [
     {
       p: "No tengo tiempo para meterme en esto.",

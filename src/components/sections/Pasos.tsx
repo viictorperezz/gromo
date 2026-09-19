@@ -1,5 +1,6 @@
 import { Titulo } from "@/components/ui/seccion";
 import { Revelar } from "@/components/ui/revelar";
+import { Boton } from "@/components/ui/boton";
 import { PASOS } from "@/lib/contenido";
 
 export function Pasos() {
@@ -50,6 +51,15 @@ export function Pasos() {
             ))}
           </ol>
         </div>
+
+        <Revelar className="mt-14 flex flex-wrap items-center gap-x-6 gap-y-4">
+          <p className="text-base leading-relaxed text-gromo-hueso/70 sm:text-lg">
+            {PASOS.cierre}
+          </p>
+          <Boton href="#contacto" variante="lima">
+            {PASOS.cta}
+          </Boton>
+        </Revelar>
       </div>
     </section>
   );

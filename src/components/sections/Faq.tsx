@@ -1,4 +1,5 @@
 import { Seccion, Titulo } from "@/components/ui/seccion";
+import { Boton } from "@/components/ui/boton";
 import { FAQ } from "@/lib/contenido";
 
 /**
@@ -44,6 +45,17 @@ export function Faq() {
               </p>
             </details>
           ))}
+
+          {/* Salida al final de la página: quien resuelve aquí su duda no
+              debería tener que volver arriba a buscar el botón. */}
+          <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
+            <p className="text-base leading-relaxed text-gromo-gris">
+              {FAQ.cierre}
+            </p>
+            <Boton href="#contacto" variante="primario">
+              {FAQ.cta}
+            </Boton>
+          </div>
         </div>
       </div>
     </Seccion>

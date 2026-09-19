@@ -1,9 +1,9 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { GromoLogo } from "@/components/brand/GromoLogo";
-import { NAV } from "@/lib/contenido";
+import { CTA_BARRA, NAV } from "@/lib/contenido";
 import { cn } from "@/lib/utils";
 
 export function Nav() {
@@ -75,7 +75,7 @@ export function Nav() {
                 : "bg-gromo-verde-oscuro text-white hover:bg-gromo-verde",
             )}
           >
-            Diagnóstico gratis
+            {CTA_BARRA}
           </a>
         </nav>
 
@@ -128,7 +128,7 @@ export function Nav() {
               onClick={() => setAbierto(false)}
               className="mt-6 rounded-full bg-gromo-verde-oscuro px-6 py-3.5 text-center text-[15px] font-semibold text-white"
             >
-              Diagnóstico gratis
+              {CTA_BARRA}
             </a>
           </nav>
         </div>
