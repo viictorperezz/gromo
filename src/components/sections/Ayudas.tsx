@@ -120,12 +120,13 @@ export function Ayudas() {
                 <span className="text-sm text-gromo-hueso/60">+ IVA</span>
               </dd>
               {/* El tramo va pegado al número: sin él, el ejemplo se leería
-                  como una cifra garantizada, y la concede la administración. */}
+                  como una cifra garantizada, y la concede la administración.
+                  Con intensidad fija (min === max) se dice «hasta», que es
+                  como se lee una convocatoria de porcentaje único. */}
               <p className="mt-4 text-[14px] leading-relaxed text-gromo-hueso/60">
-                Ejemplo con el {tipica} % de cobertura. Según la convocatoria y
-                tu perfil, en {comunidad.nombre} suele moverse entre el {min} %
-                y el {max} %, así que el neto varía. La concesión la decide la
-                administración.
+                {min === max
+                  ? `Ejemplo con el ${tipica} % de cobertura. Según la convocatoria y tu perfil, en ${comunidad.nombre} la intensidad prevista llega hasta el ${min} %, así que el neto varía. La concesión la decide la administración.`
+                  : `Ejemplo con el ${tipica} % de cobertura. Según la convocatoria y tu perfil, en ${comunidad.nombre} suele moverse entre el ${min} % y el ${max} %, así que el neto varía. La concesión la decide la administración.`}
               </p>
               <p className="mt-3 text-[14px] leading-relaxed text-gromo-hueso/60">
                 {comunidad.programa
