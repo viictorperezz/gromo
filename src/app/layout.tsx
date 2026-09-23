@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { GromoGradients } from "@/components/brand/GromoLogo";
 import { IntroGromo } from "@/components/brand/IntroGromo";
+import { PanelIntro } from "@/components/brand/PanelIntro";
 import "./globals.css";
 
 const inter = Inter({
@@ -84,6 +85,8 @@ export default function RootLayout({
         </a>
         <GromoGradients />
         <IntroGromo />
+        {/* Mesa de revisión de la intro: solo existe con `npm run dev`. */}
+        {process.env.NODE_ENV === "development" && <PanelIntro />}
         {children}
       </body>
     </html>

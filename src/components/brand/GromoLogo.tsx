@@ -3,17 +3,33 @@ import { cn } from "@/lib/utils";
 /**
  * Símbolo Brote de Gromo.
  *
- * Geometría medida sobre el original: tallo de puntas redondeadas y dos hojas
- * (cuadrados con dos esquinas opuestas redondeadas a radio completo). La punta
- * afilada de cada hoja apunta hacia fuera; la base se apoya en el tallo.
+ * Vectorizado sobre `lockup-vertical-oscuro.png` (1254 px): bordes medidos con
+ * cobertura subpíxel y arcos ajustados por mínimos cuadrados. Renderizado en
+ * Chrome y restado del PNG coincide en el 98,8 % de los píxeles; lo que queda
+ * es el antialiasing del borde. Pasado a la caja de 96 con la misma escala y
+ * el mismo aire que tenía la versión anterior, para no mover ningún tamaño.
+ *
+ * Cada hoja es un cuadrado con dos esquinas vivas (arriba-fuera y abajo-dentro)
+ * y dos arcos de cuarto de elipse: el de arriba, más cerrado, mira al tallo; el
+ * de abajo, más abierto, mira afuera. El tallo es una cápsula de radio completo.
  *
  * El degradado vive en <GromoGradients />, que se monta UNA vez en el layout
  * raíz. Así cada instancia del símbolo referencia los mismos `id` sin duplicarlos
  * en el documento, y el componente sigue siendo de servidor (cero JS al cliente).
  * Si usas el símbolo fuera de esta app, monta también <GromoGradients />.
  */
+export const BROTE = {
+  hojaLima:
+    "M24 28.79 H30.848 A12.537 12.284 0 0 1 43.385 41.073 V47.581 H39.023 A15.023 14.761 0 0 1 24 32.82 Z",
+  hojaVerde:
+    "M72 28.79 H65.152 A12.537 12.284 0 0 0 52.615 41.073 V47.581 H56.977 A15.023 14.761 0 0 0 72 32.82 Z",
+  tallo: { x: 44.938, y: 25.614, ancho: 6.177, alto: 44.772 },
+  /** Colores del PNG original: la paleta de marca, con el tallo algo más
+   *  luminoso que la hoja derecha, como en el archivo del fundador. */
+  color: { lima: "#A8E063", verde: "#35A06A", tallo: "#35AB72" },
+} as const;
 
-type SymbolTone = "degradado" | "plano" | "mono";
+type SymbolTone = "original" | "degradado" | "plano" | "mono";
 
 /**
  * Definiciones de degradado compartidas. Va una sola vez, en el layout raíz.
@@ -63,7 +79,8 @@ export function GromoGradients() {
 
 interface GromoSymbolProps {
   /**
-   * `degradado` reproduce el original (por defecto).
+   * `original` son los colores planos del PNG del fundador (por defecto).
+   * `degradado`, la variante con profundidad.
    * `plano` para favicon, tamaños mínimos e impresión a tintas planas.
    * `mono` hereda `currentColor`.
    */
@@ -75,7 +92,7 @@ interface GromoSymbolProps {
 }
 
 export function GromoSymbol({
-  tone = "degradado",
+  tone = "original",
   className,
   style,
   decorative = false,
@@ -86,6 +103,7 @@ export function GromoSymbol({
 
   const relleno: Record<SymbolTone, { lima: string; verde: string; tallo: string }> =
     {
+      original: BROTE.color,
       degradado: {
         lima: "url(#gromo-hoja-lima)",
         verde: "url(#gromo-hoja-verde)",
@@ -101,31 +119,19 @@ export function GromoSymbol({
       viewBox="0 0 96 96"
       className={cn("h-8 w-8 shrink-0", className)}
       style={style}
+      // La intro busca este símbolo en la barra para aterrizar encima.
+      data-gromo-simbolo=""
       {...a11y}
     >
-      {/* Hoja izquierda — lima. Arco elíptico: el original es algo más ancho
-          que alto (262×252 px sobre lienzo de 1254), no cuadrado. Las clases
-          `gromo-parte` las usa la intro para animar el brote por partes. */}
-      <path
-        d="M24 28 A21 20 0 0 1 45 48 A21 20 0 0 1 24 28 Z"
-        fill={f.lima}
-        className="gromo-parte gromo-parte--lima"
-      />
-      {/* Hoja derecha — verde */}
-      <path
-        d="M72 28 A21 20 0 0 0 51 48 A21 20 0 0 0 72 28 Z"
-        fill={f.verde}
-        className="gromo-parte gromo-parte--verde"
-      />
-      {/* Tallo */}
+      <path d={BROTE.hojaLima} fill={f.lima} />
+      <path d={BROTE.hojaVerde} fill={f.verde} />
       <rect
-        x="45"
-        y="26"
-        width="6"
-        height="44"
-        rx="3"
+        x={BROTE.tallo.x}
+        y={BROTE.tallo.y}
+        width={BROTE.tallo.ancho}
+        height={BROTE.tallo.alto}
+        rx={BROTE.tallo.ancho / 2}
         fill={f.tallo}
-        className="gromo-parte gromo-parte--tallo"
       />
     </svg>
   );

@@ -223,110 +223,304 @@
 }
 
 /* ---------------------------------------------------------------
-   Intro de marca
-   Pantalla verde + brote cayendo por partes + "Gromo" escrito a
-   mano. Es todo CSS y SVG a propósito: se apaga sola y no depende de
-   JavaScript. Línea de tiempo (~3,5 s): tallo 0,08-0,7 · hojas
-   0,48-1,02 · escritura 0,95-2,53 (nueve trazos, ver IntroGromo.tsx)
-   · el contenido se desvanece y después el telón verde.
+   Intro de marca: el logo nace como un brote de verdad
+   Todo CSS y SVG: se apaga sola y no depende de JavaScript (el JS
+   solo calcula el aterrizaje en la barra, ver IntroVuelo.tsx).
+   Línea de tiempo (3,36 s):
+     0,10-0,59  se traza el suelo
+     0,14-0,91  la semilla asoma y se abre · 0,32-1,05 raíces
+     0,45-0,94  el tallo sube con las hojas plegadas en la punta
+     0,45-1,78  la planta se mece al crecer
+     0,88-1,48  se abren las hojas (lima y después verde)
+     1,01-1,47  la guía sigue creciendo hasta la cima del logo
+     0,77-1,89  el campo nace en ola del centro a los bordes
+     1,50-2,45  "Gromo" se escribe a mano
+     2,52-2,94  el campo y el suelo se recogen
+     2,62-2,83  se retira la palabra
+     2,69-3,11  el símbolo vuela a la barra y aterriza encima del suyo
+     3,04-3,36  el telón se funde con el hero (misma tinta)
    --------------------------------------------------------------- */
 
-/* El brote se arma pieza a pieza: el tallo cae y rebota, y luego cada
-   hoja cae y se asienta. Las clases las pone GromoSymbol. */
-.gromo-intro .gromo-parte {
-  transform-box: fill-box;
-  transform-origin: center;
+.gromo-intro {
+  /* Línea de tierra y tamaño del brote principal. 0,7332 es la base del
+     tallo en la caja de 96 (70,386 / 96): así el tallo pisa el suelo. */
+  --suelo: 54%;
+  --s: clamp(200px, 44vmin, 420px);
+  animation: gromo-intro-telon 3360ms linear forwards;
 }
 
-@keyframes gromo-tallo-cae {
-  0% {
-    opacity: 0;
-    transform: translateY(-76px);
-    animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.55);
-  }
-  10% {
-    opacity: 1;
-  }
-  52% {
-    transform: translateY(0);
-    animation-timing-function: cubic-bezier(0.2, 0.7, 0.4, 1);
-  }
-  68% {
-    transform: translateY(-16px);
-    animation-timing-function: cubic-bezier(0.5, 0, 0.8, 0.4);
-  }
-  80% {
-    transform: translateY(0);
-    animation-timing-function: cubic-bezier(0.2, 0.7, 0.4, 1);
-  }
-  88% {
-    transform: translateY(-5px);
-    animation-timing-function: cubic-bezier(0.5, 0, 0.8, 0.4);
-  }
-  94%,
-  100% {
-    transform: translateY(0);
-  }
-}
-
-@keyframes gromo-hoja-cae {
-  0% {
-    opacity: 0;
-    transform: translateY(-58px) rotate(-16deg);
-    animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.55);
-  }
-  10% {
-    opacity: 1;
-  }
-  58% {
-    transform: translateY(0) rotate(0deg);
-    animation-timing-function: cubic-bezier(0.2, 0.7, 0.4, 1);
-  }
-  74% {
-    transform: translateY(-9px) rotate(3deg);
-    animation-timing-function: cubic-bezier(0.5, 0, 0.8, 0.4);
-  }
-  88%,
-  100% {
-    transform: translateY(0) rotate(0deg);
-  }
-}
-
-.gromo-intro .gromo-parte--tallo {
-  animation: gromo-tallo-cae 620ms 80ms both;
-}
-
-.gromo-intro .gromo-parte--lima {
-  animation: gromo-hoja-cae 420ms 480ms both;
-}
-
-.gromo-intro .gromo-parte--verde {
-  animation: gromo-hoja-cae 420ms 600ms both;
-}
-
-@keyframes gromo-intro-contenido {
+/* Se funde el color, no la opacidad: el símbolo que vuela es hijo del
+   telón y tiene que seguir entero mientras aterriza. `visibility: hidden`
+   al final deja de capturar el puntero sin una línea de JS. */
+@keyframes gromo-intro-telon {
   0%,
-  82% {
-    opacity: 1;
+  90.5% {
+    background-color: var(--gromo-tinta);
+    visibility: visible;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
-  90%,
-  100% {
-    opacity: 0;
-  }
-}
-
-/* `visibility: hidden` al final no solo oculta: deja de capturar el
-   puntero, así que la página queda utilizable sin una línea de JS. */
-@keyframes gromo-intro-salir {
-  0%,
-  90% {
-    opacity: 1;
+  99% {
+    background-color: rgb(16 35 26 / 0);
     visibility: visible;
   }
   100% {
-    opacity: 0;
+    background-color: rgb(16 35 26 / 0);
     visibility: hidden;
   }
+}
+
+@keyframes gromo-desvanecer {
+  to {
+    opacity: 0;
+  }
+}
+
+/* Crecer un trazo desde su inicio. La opacidad evita el punto que pinta
+   la punta redonda de un guion de longitud cero antes de arrancar. */
+@keyframes gromo-crecer {
+  0% {
+    stroke-dashoffset: 1;
+    opacity: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+/* El suelo */
+.gromo-intro__suelo {
+  top: var(--suelo);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(246 248 246 / 0.16) 18%,
+    rgb(246 248 246 / 0.16) 82%,
+    transparent
+  );
+  transform: scaleX(0);
+  animation:
+    gromo-suelo 490ms 105ms cubic-bezier(0.22, 1, 0.36, 1) both,
+    gromo-desvanecer 350ms 2590ms ease both;
+}
+
+@keyframes gromo-suelo {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* El brote principal */
+.gromo-intro__ancla {
+  width: var(--s);
+  height: var(--s);
+  margin-left: calc(var(--s) / -2);
+  top: calc(var(--suelo) - var(--s) * 0.7332);
+}
+
+.gromo-intro__simbolo {
+  animation: gromo-volar 420ms 2695ms cubic-bezier(0.65, 0, 0.35, 1) both;
+}
+
+/* Sin las variables (no hay JS) el símbolo no se mueve y se desvanece. */
+@keyframes gromo-volar {
+  to {
+    transform: translate(var(--volar-x, 0px), var(--volar-y, 0px)) scale(var(--volar-s, 1));
+    opacity: var(--volar-o, 0);
+  }
+}
+
+.gromo-planta__semilla {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: gromo-semilla 770ms 140ms both;
+}
+
+@keyframes gromo-semilla {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  25% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+  35%,
+  45% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  /* Se abre y la absorbe el tallo que sale de ella */
+  100% {
+    transform: scale(1.6, 0.25);
+    opacity: 0;
+  }
+}
+
+.gromo-planta__raiz {
+  stroke-dasharray: 1 2;
+  stroke-dashoffset: 1;
+  animation: gromo-crecer 560ms calc(315ms + var(--i) * 63ms) cubic-bezier(0.3, 0.6, 0.4, 1) both;
+}
+
+.gromo-planta__raices {
+  opacity: 0.7;
+  animation: gromo-desvanecer 315ms 1295ms ease both;
+}
+
+.gromo-planta__tallo {
+  stroke-dasharray: 1 2;
+  stroke-dashoffset: 1;
+}
+
+.gromo-planta__tallo--bajo {
+  animation: gromo-crecer 490ms 455ms cubic-bezier(0.33, 0.6, 0.4, 1) both;
+}
+
+.gromo-planta__tallo--guia {
+  animation: gromo-crecer 455ms 1015ms cubic-bezier(0.3, 0.6, 0.35, 1) both;
+}
+
+/* La yema viaja con la punta del tallo: mismo tiempo y misma curva que el
+   tramo bajo. 23 = base del tallo (67,3) menos el nudo (44,3). */
+.gromo-planta__yema {
+  animation: gromo-yema 490ms 455ms cubic-bezier(0.33, 0.6, 0.4, 1) both;
+}
+
+@keyframes gromo-yema {
+  0% {
+    transform: translateY(23px);
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  100% {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+/* Cada hoja sube plegada hacia arriba, pequeña, y se abre girando sobre
+   su base (la esquina que toca el tallo), con un punto de rebote. */
+.gromo-planta__hoja {
+  transform-box: view-box;
+}
+
+.gromo-planta__hoja--lima {
+  --giro: 48deg;
+  transform-origin: 43.385px 47.581px;
+  animation: gromo-hoja-abre 532ms 875ms cubic-bezier(0.34, 1.45, 0.64, 1) both;
+}
+
+.gromo-planta__hoja--verde {
+  --giro: -48deg;
+  transform-origin: 52.615px 47.581px;
+  animation: gromo-hoja-abre 532ms 959ms cubic-bezier(0.34, 1.45, 0.64, 1) both;
+}
+
+@keyframes gromo-hoja-abre {
+  from {
+    transform: rotate(var(--giro)) scale(0.28);
+  }
+  to {
+    transform: none;
+  }
+}
+
+.gromo-planta__cuerpo {
+  transform-box: view-box;
+  transform-origin: 48px 70.4px;
+  animation: gromo-mecer 1330ms 455ms cubic-bezier(0.37, 0, 0.63, 1) both;
+}
+
+@keyframes gromo-mecer {
+  0% {
+    transform: rotate(-5deg);
+  }
+  35% {
+    transform: rotate(3deg);
+  }
+  65% {
+    transform: rotate(-1.4deg);
+  }
+  85% {
+    transform: rotate(0.5deg);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+/* El campo: brotes pequeños a lo ancho de la pantalla (ver IntroGromo). */
+.gromo-intro__campo {
+  top: var(--suelo);
+  height: 0;
+}
+
+.gromo-mini {
+  width: var(--talla);
+  height: var(--talla);
+  top: calc(var(--talla) * -0.7332);
+  margin-left: calc(var(--talla) / -2);
+  overflow: visible;
+  opacity: var(--o);
+  transform-origin: 50% 73.32%;
+  animation: gromo-mini-salir 322ms var(--salida) cubic-bezier(0.5, 0, 0.75, 0) both;
+}
+
+@keyframes gromo-mini-salir {
+  to {
+    transform: scale(0.15);
+    opacity: 0;
+  }
+}
+
+.gromo-mini__tallo {
+  stroke-dasharray: 1 2;
+  stroke-dashoffset: 1;
+  animation: gromo-crecer 364ms var(--d) cubic-bezier(0.3, 0.7, 0.4, 1) both;
+}
+
+.gromo-mini__hoja {
+  transform-box: view-box;
+}
+
+.gromo-mini__hoja--lima {
+  --giro: 48deg;
+  transform-origin: 43.385px 47.581px;
+  animation: gromo-mini-hoja 364ms calc(var(--d) + 196ms) cubic-bezier(0.34, 1.5, 0.64, 1) both;
+}
+
+.gromo-mini__hoja--verde {
+  --giro: -48deg;
+  transform-origin: 52.615px 47.581px;
+  animation: gromo-mini-hoja 364ms calc(var(--d) + 252ms) cubic-bezier(0.34, 1.5, 0.64, 1) both;
+}
+
+@keyframes gromo-mini-hoja {
+  from {
+    transform: rotate(var(--giro)) scale(0);
+  }
+  to {
+    transform: none;
+  }
+}
+
+/* La palabra, bajo el suelo, con la proporción del lockup: tan ancha como
+   el símbolo (que ocupa la mitad de su caja) y a la misma distancia. Se
+   retira justo antes de que el símbolo vuele. */
+.gromo-intro__palabra {
+  top: calc(var(--suelo) + var(--s) * 0.06);
+  animation: gromo-desvanecer 210ms 2625ms ease both;
+}
+
+.gromo-intro__trazo {
+  height: calc(var(--s) * 0.135);
+  width: auto;
 }
 
 /* La palabra: el texto es la Inter 800 de siempre; la máscara solo deja
@@ -349,28 +543,24 @@
   stroke-linejoin: round;
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
-  animation: gromo-trazo-linea var(--dur, 200ms) linear var(--retraso, 0ms) both;
+  animation: gromo-trazo-linea var(--dur, 140ms) linear var(--retraso, 0ms) both;
 }
 
+/* La opacidad a 0 antes de arrancar evita que la punta redonda (36 de
+   ancho) destape un círculo de cada letra mientras la pluma aún no ha
+   llegado a ella. */
 @keyframes gromo-trazo-linea {
-  to {
-    stroke-dashoffset: 0;
+  0% {
+    stroke-dashoffset: 1;
+    opacity: 0;
   }
-}
-
-.gromo-intro {
-  animation: gromo-intro-salir 3500ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-.gromo-intro__contenido {
-  animation: gromo-intro-contenido 3500ms ease-out forwards;
-}
-
-/* El vídeo del hero, con el nivel corregido (ver VideoBucle.tsx): el
-   archivo decodifica con +1 de verde de fondo y el screen lo sumaba a la
-   tinta, dejando un rectángulo perceptible. */
-.gromo-video {
-  filter: url(#gromo-nivel-video);
+  1% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
 }
 
 /* Quien ya la vio en esta pestaña no la repite: el script en línea del

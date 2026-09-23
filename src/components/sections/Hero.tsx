@@ -1,5 +1,4 @@
-import { TalloBrotes } from "@/components/brand/TalloBrotes";
-import { VideoBucle } from "@/components/brand/VideoBucle";
+import { BroteBucle } from "@/components/brand/BroteBucle";
 import { Boton } from "@/components/ui/boton";
 import { HERO } from "@/lib/contenido";
 
@@ -51,11 +50,12 @@ export function Hero() {
             </Boton>
           </div>
 
-          {/* El filete de la izquierda no es una línea: es una enredadera.
-              Va absoluta para que el párrafo no se entere de su ancho, y con
-              altura completa para que crezca con el texto al reflujo móvil. */}
-          <div style={entrar(560)} className="relative mt-10 max-w-xl pl-11">
-            <TalloBrotes className="absolute top-0 left-0 h-full w-8" />
+          {/* Sin enredadera: competía con el brote de la derecha, que es el
+              único motivo de marca del hero. Queda un filete fino en lima. */}
+          <div
+            style={entrar(560)}
+            className="mt-10 max-w-xl border-l-2 border-gromo-lima/35 pl-5"
+          >
             {/* La primera línea es el gancho (lo que acaba pagando), así que
                 sale del gris del resto: el ojo tiene que caer en el número
                 antes de leer de dónde sale. */}
@@ -74,8 +74,10 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="relative -order-1 lg:order-none">
-          <VideoBucle className="mx-auto w-full max-w-[560px] lg:max-w-none" />
+        {/* En escritorio arriba, a la altura del titular: centrado con toda
+            la columna de texto caía 200 px por debajo y dejaba vacío encima. */}
+        <div className="relative -order-1 lg:order-none lg:self-start">
+          <BroteBucle className="mx-auto w-full max-w-[560px] lg:max-w-none" />
         </div>
       </div>
     </section>

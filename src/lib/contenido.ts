@@ -50,7 +50,9 @@ export const HERO = {
    * pinta distinta en Hero.tsx; si se reordena la lista, se rompe eso.
    */
   apunte: [
-    "Un proyecto entero suele acabar costándote entre 1.000 € y 2.500 €.",
+    // Espacios que no se parten entre cifra y €: si no, el «€.» caía solo
+    // en la línea de abajo.
+    "Un proyecto entero suele acabar costándote entre 1.000 € y 2.500 €.",
     "El precio son 5.000 € + IVA, pero las ayudas públicas a la digitalización subvencionan entre el 50 % y el 80 %, según tu comunidad.",
     "Los trámites de la ayuda van incluidos.",
     "Y si prefieres no depender de una ayuda, también se puede hacer como proyecto privado.",
@@ -58,8 +60,8 @@ export const HERO = {
 } as const;
 
 export const VIDEO = {
-  pausar: "Pausar vídeo",
-  reanudar: "Reanudar vídeo",
+  pausar: "Pausar animación",
+  reanudar: "Reanudar animación",
 } as const;
 
 export const PROBLEMA = {

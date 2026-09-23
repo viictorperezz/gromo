@@ -97,6 +97,10 @@ export function Ayudas() {
               <SelectorComunidad valor={comunidad} onCambio={setId} />
             </div>
 
+            {/* Un solo <dl> para las tres cifras: el neto iba en <dt>/<dd>
+                sueltos fuera de la lista, que es HTML inválido. La última
+                línea no lleva filete propio: junto al del neto se leían dos
+                rayas seguidas, como una fila vacía. */}
             <dl className="mt-8 grid gap-5">
               <Linea
                 etiqueta="Coste del proyecto de ejemplo"
@@ -106,19 +110,22 @@ export function Ayudas() {
                 etiqueta={`Subvención (${tipica} %)`}
                 valor={`− ${EUROS.format(subvencionAnim)}`}
                 acento
+                filete={false}
               />
+              <div className="mt-3 border-t border-white/12 pt-8">
+                <dt className="text-[15px] font-semibold text-gromo-hueso/70">
+                  Coste neto para ti
+                </dt>
+                <dd className="mt-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                  <span className="text-[2.75rem] leading-none font-extrabold tracking-[-0.03em] text-gromo-lima tabular-nums sm:text-[3.5rem]">
+                    {EUROS.format(netoAnim)}
+                  </span>
+                  <span className="text-sm text-gromo-hueso/60">+ IVA</span>
+                </dd>
+              </div>
             </dl>
 
-            <div className="mt-8 border-t border-white/12 pt-8">
-              <dt className="text-[15px] font-semibold text-gromo-hueso/70">
-                Coste neto para ti
-              </dt>
-              <dd className="mt-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                <span className="text-[2.75rem] leading-none font-extrabold tracking-[-0.03em] text-gromo-lima tabular-nums sm:text-[3.5rem]">
-                  {EUROS.format(netoAnim)}
-                </span>
-                <span className="text-sm text-gromo-hueso/60">+ IVA</span>
-              </dd>
+            <div>
               {/* El tramo va pegado al número: sin él, el ejemplo se leería
                   como una cifra garantizada, y la concede la administración.
                   Con intensidad fija (min === max) se dice «hasta», que es
@@ -185,13 +192,20 @@ function Linea({
   etiqueta,
   valor,
   acento = false,
+  filete = true,
 }: {
   etiqueta: string;
   valor: string;
   acento?: boolean;
+  filete?: boolean;
 }) {
   return (
-    <div className="flex items-baseline justify-between gap-4 border-b border-white/8 pb-4">
+    <div
+      className={cn(
+        "flex items-baseline justify-between gap-4",
+        filete && "border-b border-white/8 pb-4",
+      )}
+    >
       <dt className="text-[15px] text-gromo-hueso/65">{etiqueta}</dt>
       <dd
         className={cn(
